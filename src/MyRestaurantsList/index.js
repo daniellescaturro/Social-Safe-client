@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { Card, Image } from 'semantic-ui-react'
-import '../index.css'
+import React from 'react'
+import { Card } from 'semantic-ui-react'
 
 
-export default function HomeList(props) {
-
-  const restaurantsToDisplay = props.restaurants.map(restaurant => {
-    return(
+export defalut function MyRestaurantsList(props) {
+  const restaurants = props.restaurants.map(restaurant => {
+    return (
       <Card key={restaurant.id}>
         <Image centered={true} className="restaurantImage" src={restaurant.image_url} />
         <Card.Content>
@@ -23,12 +21,11 @@ export default function HomeList(props) {
         </Card.Content>
       </Card>
     )
-  })
+  }
 
   return(
     <Card.Group centered={true}>
       {restaurantsToDisplay}
     </Card.Group>
   )
-
 }
