@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from '../Navbar'
 import LoginRegisterForm from '../LoginRegisterForm'
+import HomeContainer from '../HomeContainer'
 import { Header, Form, Button, Label } from 'semantic-ui-react'
 import '../App.css'
 
@@ -104,6 +105,7 @@ logout = async () => {
           ?
           <React.Fragment>
             <Navbar email={this.state.loggedInUserEmail} logout={this.logout} />
+            <HomeContainer />
           </React.Fragment>
           :
           <LoginRegisterForm
