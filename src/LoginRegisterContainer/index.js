@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import Navbar from '../Navbar'
 import LoginRegisterForm from '../LoginRegisterForm'
-import { Header } from 'semantic-ui-react'
+import { Header, Form, Button, Label } from 'semantic-ui-react'
 import '../App.css'
 
 export default class LoginRegisterContainer extends Component {
@@ -102,7 +103,7 @@ logout = async () => {
           this.state.loggedIn
           ?
           <React.Fragment>
-            <Header email={this.state.loggedInUserEmail} logout={this.logout} />
+            <Navbar email={this.state.loggedInUserEmail} logout={this.logout} />
           </React.Fragment>
           :
           <LoginRegisterForm
