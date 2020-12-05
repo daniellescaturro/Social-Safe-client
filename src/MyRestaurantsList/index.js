@@ -17,12 +17,16 @@ export default function MyRestaurantsList(props) {
           <Card.Meta>{restaurant.city}</Card.Meta>
           <Card.Meta>{restaurant.state}</Card.Meta>
           <Card.Meta>{restaurant.zip_code}</Card.Meta>
-          <Card.Description>{restaurant.rating}</Card.Description>
+          <Card.Description>Rating {restaurant.rating}</Card.Description>
           <Card.Description>{restaurant.heat_lamps}</Card.Description>
         </Card.Content>
         <Card.Content extra>
+          <Button>Edit</Button>
+          <Button>Delete</Button>
+        </Card.Content>
+        <Card.Content extra>
           <Button icon>
-            <Icon name='heart outline' />
+            <Icon name='heart' />
           </Button>
           <Button>Review</Button>
         </Card.Content>

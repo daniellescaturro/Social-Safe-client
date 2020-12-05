@@ -2,26 +2,26 @@ import React from 'react'
 import { Menu, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-const logout = async () => {
-  try {
-    const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
-
-    const logoutResponse = await fetch(url, {
-      credentials: 'include'
-    })
-    console.log("logoutResponse", logoutResponse);
-    const logoutJson = await logoutResponse.json()
-    console.log("logoutJson", logoutJson);
-
-    if(logoutResponse.status === 200) {
-      localStorage.setItem('active', false);
-
-    }
-  } catch(error) {
-    console.error("Error logging out")
-    console.error(error)
-  }
-}
+// const logout = async () => {
+//   try {
+//     const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
+//
+//     const logoutResponse = await fetch(url, {
+//       credentials: 'include'
+//     })
+//     console.log("logoutResponse", logoutResponse);
+//     const logoutJson = await logoutResponse.json()
+//     console.log("logoutJson", logoutJson);
+//
+//     if(logoutResponse.status === 200) {
+//       localStorage.setItem('active', false);
+//
+//     }
+//   } catch(error) {
+//     console.error("Error logging out")
+//     console.error(error)
+//   }
+// }
 
 
 export default function Navbar(props) {
@@ -31,14 +31,18 @@ export default function Navbar(props) {
 	    const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
 
 	    const logoutResponse = await fetch(url, {
-	      credentials: 'include'
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				credentials: 'include'
 	    })
 	    console.log("logoutResponse", logoutResponse);
 	    const logoutJson = await logoutResponse.json()
 	    console.log("logoutJson", logoutJson);
 
 	    if(logoutResponse.status === 200) {
-	      localStorage.setItem('active', false);
+	      localStorage.setItem('active', null);
 				props.history.push('/');
 	    }
 	  } catch(error) {

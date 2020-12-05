@@ -7,8 +7,8 @@ import HomeContainer from './HomeContainer'
 import MyRestaurantsContainer from './MyRestaurantsContainer'
 import NewRestaurantForm from './NewRestaurantForm'
 
-
 import './App.css';
+
 const Protected = ({ component: Component,  ...rest}) => {
   return <Route {...rest} render={(props)=>(
     localStorage.getItem('active') === 'active' ? <Component {...props}/> : <Redirect to='/login'/>

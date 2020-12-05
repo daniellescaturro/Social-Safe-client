@@ -79,28 +79,28 @@ login = async (loginInfo) => {
   }
 }
 
-logout = async () => {
-  try {
-    const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
-
-    const logoutResponse = await fetch(url, {
-      credentials: 'include'
-    })
-    console.log("logoutResponse", logoutResponse);
-    const logoutJson = await logoutResponse.json()
-    console.log("logoutJson", logoutJson);
-
-    if(logoutResponse.status === 200) {
-      this.setState({
-        loggedIn: false,
-        loggedInUserEmail: ''
-      })
-    }
-  } catch(error) {
-    console.error("Error logging out")
-    console.error(error)
-  }
-}
+// logout = async () => {
+//   try {
+//     const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
+//
+//     const logoutResponse = await fetch(url, {
+//       credentials: 'include'
+//     })
+//     console.log("logoutResponse", logoutResponse);
+//     const logoutJson = await logoutResponse.json()
+//     console.log("logoutJson", logoutJson);
+//
+//     if(logoutResponse.status === 200) {
+//       this.setState({
+//         loggedIn: false,
+//         loggedInUserEmail: ''
+//       })
+//     }
+//   } catch(error) {
+//     console.error("Error logging out")
+//     console.error(error)
+//   }
+// }
 
   render() {
     return (
