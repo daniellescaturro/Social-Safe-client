@@ -104,7 +104,7 @@ logout = async () => {
           this.state.loggedIn
           ?
           <React.Fragment>
-            <Navbar email={this.state.loggedInUserEmail} logout={this.logout} />
+
             <HomeContainer />
           </React.Fragment>
           :
@@ -117,3 +117,5 @@ logout = async () => {
     )
   }
 }
+
+//<Navbar email={this.state.loggedInUserEmail} logout={this.logout} />

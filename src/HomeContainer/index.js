@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HomeList from '../HomeList'
 import { Card, Image } from 'semantic-ui-react'
+import Navbar from '../Navbar'
 
 export default class HomeContainer extends Component {
   constructor(props) {
