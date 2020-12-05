@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MyRestaurantsList from '../MyRestaurantsList'
+import EditRestaurantModal from '../EditRestaurantModal'
 
 export default class MyRestaurantsContainer extends Component {
 
@@ -81,9 +82,9 @@ export default class MyRestaurantsContainer extends Component {
    })
  }
 
- delete = async (idOfRestaurantToDelete) => {
+ deleteRestaurant = async (idOfRestaurantToDelete) => {
     try {
-      const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + idOfRestaurantToDelete
+      const url = process.env.REACT_APP_API_URL + "/api/v1/favorities/" + idOfRestaurantToDelete
 
       const deleteRestaurantResponse = await fetch(url, {
         method: 'DELETE',
@@ -108,6 +109,16 @@ export default class MyRestaurantsContainer extends Component {
     return (
       <div className="myRestaurantsContainer">
         <MyRestaurantsList restaurants={this.state.restaurants} />
+
+      {
+        this.state.idOfRestaurantToEdit !== -1
+        &&
+        <EditRestaurantModal
+          restaurantToEdit={this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit)}
+          updateRestaurant={this.update.Dog}
+          closeModal={this.closeModal}
+        />
+      }
       </div>
     )
   }

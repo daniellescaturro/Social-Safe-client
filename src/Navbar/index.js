@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom'
 //
 //     if(logoutResponse.status === 200) {
 //       localStorage.setItem('active', false);
-//
+//			 props.history.push('/');
 //     }
 //   } catch(error) {
 //     console.error("Error logging out")

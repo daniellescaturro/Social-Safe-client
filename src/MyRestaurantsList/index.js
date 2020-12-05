@@ -3,7 +3,7 @@ import { Card, Image, Button, Icon } from 'semantic-ui-react'
 
 
 export default function MyRestaurantsList(props) {
-  const restaurants = props.restaurants.map(fav=> {
+  const restaurants = props.restaurants.map(fav => {
     let restaurant = fav.restaurant_id
     return (
       <Card key={restaurant.id}>
@@ -21,8 +21,14 @@ export default function MyRestaurantsList(props) {
           <Card.Description>{restaurant.heat_lamps}</Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button>Edit</Button>
-          <Button>Delete</Button>
+          <Button
+            onClick={()=> props.editRestaurant(restaurant.id)}>
+            Edit
+          </Button>
+          <Button
+            onClick={()=>props.deleteRestaurant(restaurant.id)}>
+            Delete
+          </Button>
         </Card.Content>
         <Card.Content extra>
           <Button icon>
