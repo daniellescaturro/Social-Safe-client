@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import Navbar from '../Navbar'
 import LoginRegisterForm from '../LoginRegisterForm'
 import HomeContainer from '../HomeContainer'
-import { Header, Form, Button, Label } from 'semantic-ui-react'
 import '../App.css'
 
 export default class LoginRegisterContainer extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       loggedIn: false,
@@ -15,6 +13,11 @@ export default class LoginRegisterContainer extends Component {
     }
   }
 
+  componentDidMount(){
+    if(localStorage.getItem('active') === 'active'){
+      this.props.history.push('/');
+    }
+  }
 
 register = async (registerInfo) => {
   console.log("register called with the following info", registerInfo);
@@ -67,6 +70,8 @@ login = async (loginInfo) => {
           loggedIn: true,
           loggedInUserEmail: loginJson.data.email
         })
+        localStorage.setItem('active', 'active')
+        this.props.history.push('/');
       }
   } catch(error) {
     console.error("Error trying to log in")
@@ -99,6 +104,7 @@ logout = async () => {
 
   render() {
     return (
+      <div>
       <div className="LoginRegisterContainer">
         {
           this.state.loggedIn
@@ -113,6 +119,7 @@ logout = async () => {
             register={this.register}
           />
         }
+      </div>
       </div>
     )
   }

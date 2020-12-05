@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import MyRestaurantsList from '../MyRestaurantsList'
 
-export default MyRestaurantsContainer extends Component {
+export default class MyRestaurantsContainer extends Component {
 
   constructor(props) {
     super(props)
@@ -35,11 +35,11 @@ export default MyRestaurantsContainer extends Component {
     }
   }
 
-  
+
   render() {
     return (
       <div className="myRestaurantsContainer">
-        <MyRestaurantsList />
+        <MyRestaurantsList restaurants={this.state.restaurants} />
       </div>
     )
   }

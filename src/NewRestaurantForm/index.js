@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Label, Segment, Checkbox, Header } from 'semantic-ui-react'
 
+//add favorite here?
 
 export default class NewRestaurantForm extends Component {
 
@@ -51,7 +52,7 @@ export default class NewRestaurantForm extends Component {
       <Segment>
       <Header>
         <h2>Add Restaurant</h2>
-      </Header>  
+      </Header>
       <Form onSubmit={this.handleSubmit}>
 
         <Label horizontal>Restaurant Name:</Label>
@@ -129,8 +130,8 @@ export default class NewRestaurantForm extends Component {
         <Label horizontal>Rating:</Label>
         <Form.Input
           type="decimal(2,1)"
-          name="name"
-          value={this.state.name}
+          name="rating"
+          value={this.state.rating}
           placeholder="Enter a resource"
           onChange={this.handleChange}
         />

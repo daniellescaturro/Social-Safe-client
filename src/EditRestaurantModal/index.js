@@ -116,8 +116,8 @@ export default class EditRestaurantModal extends Component {
           <Label horizontal>Rating:</Label>
           <Form.Input
             type="decimal(2,1)"
-            name="name"
-            value={this.state.name}
+            name="rating"
+            value={this.state.rating}
             placeholder="Enter a resource"
             onChange={this.handleChange}
           />

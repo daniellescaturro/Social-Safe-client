@@ -1,9 +1,10 @@
 import React from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, Image, Button, Icon } from 'semantic-ui-react'
 
 
-export defalut function MyRestaurantsList(props) {
-  const restaurants = props.restaurants.map(restaurant => {
+export default function MyRestaurantsList(props) {
+  const restaurants = props.restaurants.map(fav=> {
+    let restaurant = fav.restaurant_id
     return (
       <Card key={restaurant.id}>
         <Image centered={true} className="restaurantImage" src={restaurant.image_url} />
@@ -19,13 +20,19 @@ export defalut function MyRestaurantsList(props) {
           <Card.Description>{restaurant.rating}</Card.Description>
           <Card.Description>{restaurant.heat_lamps}</Card.Description>
         </Card.Content>
+        <Card.Content extra>
+          <Button icon>
+            <Icon name='heart outline' />
+          </Button>
+          <Button>Review</Button>
+        </Card.Content>
       </Card>
     )
-  }
+  })
 
-  return(
+  return (
     <Card.Group centered={true}>
-      {restaurantsToDisplay}
+      {restaurants}
     </Card.Group>
   )
 }
