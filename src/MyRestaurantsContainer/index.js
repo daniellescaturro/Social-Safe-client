@@ -10,7 +10,7 @@ export default class MyRestaurantsContainer extends Component {
     this.state = {
       restaurants: [],
       idOfRestaurantToEdit: -1,
-      //action: ''
+      action: ''
     }
   }
 
@@ -75,10 +75,11 @@ export default class MyRestaurantsContainer extends Component {
       const updateRestaurantResponse = await fetch(url, {
         method: 'PUT',
         body: JSON.stringify(updatedRestaurantInfo),
+        //mode: 'no-cors',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
-          
+
         }
       })
 
@@ -117,7 +118,7 @@ export default class MyRestaurantsContainer extends Component {
         this.state.idOfRestaurantToEdit !== -1
         &&
         <EditRestaurantModal
-          restaurantToEdit={this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit)}
+          restaurantToEdit={this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit).restaurant_id}
           updateRestaurant={this.updateRestaurant}
           closeModal={this.closeModal}
         />

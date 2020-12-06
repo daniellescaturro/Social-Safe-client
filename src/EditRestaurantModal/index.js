@@ -16,6 +16,7 @@ export default class EditRestaurantModal extends Component {
       state: props.restaurantToEdit.state,
       zip_code: props.restaurantToEdit.zip_code,
       rating: props.restaurantToEdit.rating,
+      social_distancing_rating: props.restaurantToEdit, //this is in my Review model, but want data entry available here, if possible
       heat_lamps: props.restaurantToEdit.heat_lamps
     }
   }
@@ -34,10 +35,8 @@ export default class EditRestaurantModal extends Component {
 
   render() {
     return(
-      <Modal open={true} closeIcon={true} onClose={this.props.closeModal}>
-        <Header>
-          <h2>Edit Restaurant</h2>
-        </Header>
+      <Modal className='form' open={true} closeIcon={true} onClose={this.props.closeModal}>
+        <Header className='formHeader' as='h2' color='grey'>Edit Restaurant</Header>
         <Modal.Content>
         <Form onSubmit={this.handleSubmit}>
 
@@ -106,7 +105,7 @@ export default class EditRestaurantModal extends Component {
 
           <Label horizontal>Zip Code:</Label>
           <Form.Input
-            type="smallInteger"
+            type="number"
             name="zip_code"
             value={this.state.zip_code}
             placeholder="Enter zip code"
@@ -115,7 +114,16 @@ export default class EditRestaurantModal extends Component {
 
           <Label horizontal>Rating:</Label>
           <Form.Input
-            type="decimal(2,1)"
+            type="number"
+            name="rating"
+            value={this.state.rating}
+            placeholder="Enter a resource"
+            onChange={this.handleChange}
+          />
+
+          <Label horizontal>Social Distancing Rating:</Label>
+          <Form.Input
+            type="number"
             name="rating"
             value={this.state.rating}
             placeholder="Enter a resource"

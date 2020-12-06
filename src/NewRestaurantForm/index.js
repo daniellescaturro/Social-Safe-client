@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Label, Segment, Checkbox, Header } from 'semantic-ui-react'
+import '../index.css'
+import '../App.css'
 
 export default class NewRestaurantForm extends Component {
 
@@ -29,7 +31,7 @@ export default class NewRestaurantForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    this.props.createRestaurant(this.state)
+    this.createRestaurant(this.state)
 
     this.setState({
       name: '',
@@ -48,7 +50,7 @@ export default class NewRestaurantForm extends Component {
 
   createRestaurant = async (restaurantToAdd) => {
       try {
-        const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/"
+        const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/add"
         const createRestaurantResponse = await fetch(url, {
           method: 'POST',
           headers: {
@@ -68,14 +70,14 @@ export default class NewRestaurantForm extends Component {
       } catch(err) {
         console.log("Error adding restaurant", err)
       }
+      localStorage.setItem('active', 'active')
+      this.props.history.push('/')
     }
 
   render() {
     return(
-      <Segment>
-      <Header>
-        <h2>Add Restaurant</h2>
-      </Header>
+      <Segment className='form'>
+      <Header className='formHeader' as='h2' color='grey'>Add Restaurant</Header>
       <Form onSubmit={this.handleSubmit}>
 
         <Label horizontal>Restaurant Name:</Label>
@@ -143,7 +145,7 @@ export default class NewRestaurantForm extends Component {
 
         <Label horizontal>Zip Code:</Label>
         <Form.Input
-          type="smallInteger"
+          type="number"
           name="zip_code"
           value={this.state.zip_code}
           placeholder="Enter zip code"
@@ -152,10 +154,19 @@ export default class NewRestaurantForm extends Component {
 
         <Label horizontal>Rating:</Label>
         <Form.Input
-          type="decimal"
+          type="number"
           name="rating"
           value={this.state.rating}
           placeholder="Enter a rating"
+          onChange={this.handleChange}
+        />
+
+        <Label horizontal>Social Distancing Rating:</Label>
+        <Form.Input
+          type="number"
+          name="rating"
+          value={this.state.rating}
+          placeholder="Enter a resource"
           onChange={this.handleChange}
         />
 

@@ -71,6 +71,7 @@ login = async (loginInfo) => {
           loggedInUserEmail: loginJson.data.email
         })
         localStorage.setItem('active', 'active')
+        localStorage.setItem('userData', JSON.stringify(loginJson.data))
         this.props.history.push('/');
       }
   } catch(error) {

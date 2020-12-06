@@ -40,6 +40,32 @@ export default class ReviewModal extends Component {
     })
   }
 
+  createReview = async (reviewToAdd) => {
+      try {
+        const url = process.env.REACT_APP_API_URL + "/api/v1/reviews/"
+        const createReviewResponse = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify(reviewToAdd)
+        })
+        const createReviewJson = await createReviewResponse.json()
+
+        if(createReviewResponse.status === 201 || createReviewResponse.status === 200){
+          this.setState({
+            reviews: [...this.state.reviews, createReviewJson.data]
+          })
+        }
+
+      } catch(err) {
+        console.log("Error adding review", err)
+      }
+      localStorage.setItem('active', null)
+      this.props.history.push('/')
+    }
+
   render() {
     return(
       <Button icon>
@@ -57,20 +83,21 @@ export default class ReviewModal extends Component {
 
           <Label horizontal>Rating:</Label>
           <Form.Input
-            type="decimal(2,1)"
+            type="number"
             name="rating"
             onChange={this.handleChange}
           />
 
           <Label horizontal>Social Distancing Rating:</Label>
           <Form.Input
-            type="decimal(2,1)"
+            type="number"
             name="social_distancing_rating"
             onChange={this.handleChange}
           />
 
           <Label horizontal>Heat Lamps:</Label>
           <Form.Input
+            type="boolean"
             control={Checkbox}
             name="heat_lamps"
             onChange={this.handleChange}

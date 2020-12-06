@@ -1,12 +1,12 @@
 import React from 'react'
 import { Card, Image, Button, Icon } from 'semantic-ui-react'
-
+import '../index.css'
 
 export default function MyRestaurantsList(props) {
   const restaurants = props.restaurants.map(fav => {
     let restaurant = fav.restaurant_id
     return (
-      <Card key={restaurant.id}>
+      <Card color='brown' key={restaurant.id}>
         <Image centered={true} className="restaurantImage" src={restaurant.image_url} />
         <Card.Content>
           <Card.Header>
@@ -17,24 +17,32 @@ export default function MyRestaurantsList(props) {
           <Card.Meta>{restaurant.city}</Card.Meta>
           <Card.Meta>{restaurant.state}</Card.Meta>
           <Card.Meta>{restaurant.zip_code}</Card.Meta>
-          <Card.Description>Rating {restaurant.rating}</Card.Description>
-          <Card.Description>{restaurant.heat_lamps}</Card.Description>
+          <Card.Meta>Rating: {restaurant.rating}</Card.Meta>
+          <Card.Meta>Heat Lamps: {restaurant.heat_lamps == true ? 'yes': 'No'}</Card.Meta>
         </Card.Content>
-        <Card.Content extra>
-          <Button
-            onClick={()=> props.editRestaurant(restaurant.id)}>
-            Edit
-          </Button>
-          <Button
-            onClick={()=> props.deleteRestaurant(restaurant.id)}>
-            Delete
-          </Button>
-        </Card.Content>
+        {
+          JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
+          ?
+          <Card.Content extra>
+            <Button
+              basic color='brown' onClick={()=> props.editRestaurant(fav.id)}>
+              Edit
+            </Button>
+            <Button
+              basic color='brown'
+              onClick={()=> props.deleteRestaurant(restaurant.id)}>
+              Delete
+            </Button>
+          </Card.Content>
+          :
+          ''
+        }
+
         <Card.Content extra>
           <Button icon>
-            <Icon name='heart' />
+            <Icon name='heart' color='pink' />
           </Button>
-          <Button>Review</Button>
+          <Button color='brown'>Review</Button>
         </Card.Content>
       </Card>
     )

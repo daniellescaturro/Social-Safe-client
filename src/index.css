@@ -1,6 +1,7 @@
 body {
-  margin: 0;
+  margin: 0 auto;
   font-family: sans-serif;
+  background-color: #C4EEF2 !important;
 }
 
 code {
@@ -10,10 +11,28 @@ code {
 
 .link {
   cursor: pointer;
-  color: skyblue;
+  color: #3B83C0;
   text-decoration: underline;
+  font-size: 14px;
 }
 
 .restaurantImage {
   height: 150px;
+}
+
+.navbar {
+  background-color: #74BCCC  !important;
+  color: ghostwhite !important;
+  vertical-align: center !important;
+  font-size: 18px !important;
+}
+
+.form {
+  width: 80% !important;
+  margin: 0 auto !important;
+  text-align: left;
+}
+.formHeader {
+  margin-top: 15px !important;
+  margin-left: 30px !important;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Label } from 'semantic-ui-react'
+import { Header, Form, Button, Label } from 'semantic-ui-react'
 import '../index.css'
 
 
@@ -44,14 +44,14 @@ handleSubmit = (event) => {
 
   render() {
     return (
-      <React.Fragment>
-        <h2>{this.state.action} here</h2>
+      <div className='form'>
+        <Header className='formHeader' as='h2' color='grey'>{this.state.action} Here</Header>
         <Form onSubmit={this.handleSubmit}>
         {
          this.state.action === "Register"
          &&
          <React.Fragment>
-           <Label>Username:</Label>
+           <Label horizontal>Username:</Label>
            <Form.Input
              type="text"
              name="username"
@@ -61,7 +61,7 @@ handleSubmit = (event) => {
            />
          </React.Fragment>
         }
-          <Label>Email:</Label>
+          <Label horizontal>Email:</Label>
           <Form.Input
             type="email"
             name="email"
@@ -69,7 +69,7 @@ handleSubmit = (event) => {
             value={this.state.email}
             onChange={this.handleChange}
           />
-          <Label>Password:</Label>
+          <Label horizontal>Password:</Label>
           <Form.Input
             type="password"
             name="password"
@@ -93,7 +93,7 @@ handleSubmit = (event) => {
           </p>
 
         }
-      </React.Fragment>
+      </div>
     )
   }
 }

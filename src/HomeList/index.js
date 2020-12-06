@@ -1,10 +1,8 @@
 import React, { useState, useEffect, Component} from 'react'
-import { Card, Image, Button, Icon } from 'semantic-ui-react'
+import { Card, Image, Button, Icon, Grid } from 'semantic-ui-react'
 import '../index.css'
 
 const RenderRestaurant = ({restaurant, favorite}) => {
-
-
   let f = false
   if(favorite != undefined) {
       f = favorite.favorite
@@ -32,7 +30,6 @@ const RenderRestaurant = ({restaurant, favorite}) => {
         console.log("updateJson", updateJson)
 
         if(updateResponse.status == 200) {
-          // update favorite state
         }
       }else{
         const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + restaurant.id
@@ -62,9 +59,9 @@ const RenderRestaurant = ({restaurant, favorite}) => {
 
   }
   return(
-    <Card key={restaurant.id}>
+    <Card color='brown' key={restaurant.id}>
       <Image centered={true} className="restaurantImage" src={restaurant.image_url} />
-      <Card.Content>
+      <Card.Content center={true}>
         <Card.Header>
           <a href={restaurant.url}>{restaurant.name}</a>
         </Card.Header>
@@ -73,20 +70,18 @@ const RenderRestaurant = ({restaurant, favorite}) => {
         <Card.Meta>{restaurant.city}</Card.Meta>
         <Card.Meta>{restaurant.state}</Card.Meta>
         <Card.Meta>{restaurant.zip_code}</Card.Meta>
-        <Card.Description><Card.Meta>Rating: {restaurant.rating}</Card.Meta></Card.Description>
-        <Card.Description>{restaurant.heat_lamps}</Card.Description>
+        <Card.Meta>Rating: {restaurant.rating}</Card.Meta>
+        <Card.Meta>Heat Lamps: {restaurant.heat_lamps==true?'yes':'no'}</Card.Meta>
       </Card.Content>
       <Card.Content extra>
         <Button onClick={()=> { handleClick()}} icon>
-          { isFavorite ? <Icon name='heart' /> : <Icon name='heart outline' /> }
+          { isFavorite ? <Icon name='heart' color='pink' /> : <Icon name='heart outline' color='pink' /> }
         </Button>
-        <Button>Review</Button>
+        <Button color='brown'>Review</Button>
       </Card.Content>
     </Card>
   )
 }
-
-
 
 export default function HomeList(props) {
 

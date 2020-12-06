@@ -1,7 +1,10 @@
 import React from 'react'
-import { Menu, Button } from 'semantic-ui-react'
+import {withRouter} from 'react-router'
+import { Menu, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import NewRestaurantForm from '../NewRestaurantForm'
+import '../index.css'
+import '../App.css'
 
 // 	ORIGINAL LOGOUT FUNCTION
 // const logout = async () => {
@@ -25,10 +28,8 @@ import NewRestaurantForm from '../NewRestaurantForm'
 //   }
 // }
 
+ function Navbar(props) {
 
-
-export default function Navbar(props) {
-	console.log(props)
 	const logout = async () => {
 	  try {
 	    const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
@@ -46,7 +47,8 @@ export default function Navbar(props) {
 
 	    if(logoutResponse.status === 200) {
 	      localStorage.setItem('active', null);
-				props.history.push('/');
+				localStorage.setItem('userData', null);
+				props.history.push('/login');
 	    }
 	  } catch(error) {
 	    console.error("Error logging out")
@@ -54,23 +56,21 @@ export default function Navbar(props) {
 	  }
 	}
 
-	//HOW DO I ENSURE THE ADD RESTAURANT FORM IS PROPERLY SYNCED UP? I TRIED THIS, BUT DON'T THINK IT'S CORRECT.
-		// <Menu.Item>
-		// 	<Link to="/add_restaurant" onClick={() => this.createRestaurant}>
-		// 	Add Restaurant
-		// 	</Link>
-		// </Menu.Item>
 
 	return (
-		<Menu secondary pointing>
-			<Menu.Item><Link to='/'>Social Safe</Link></Menu.Item>
+		<Menu secondary pointing className="navbar">
+			<Menu.Item><Icon name='glass martini' color='black'></Icon></Menu.Item>
+			<Menu.Item fontsize={18}><Link to='/'>Social Safe</Link></Menu.Item>
 			<Menu.Item><Link to="/favorites">My Favorites</Link></Menu.Item>
 			<Menu.Item><Link to="/add_restaurant">Add Restaurant</Link></Menu.Item>
-			<Menu.Item position='right'>
-				<Button onClick={()=>logout()}>
-				Logout
-				</Button>
-			</Menu.Item>
+			<Menu.Item position='right'><Link to="/login">Login</Link></Menu.Item>
+			<Menu.Item><Link to="#" onClick={()=>logout()}>Logout</Link></Menu.Item>
 		</Menu>
 	)
 }
+export default withRouter(Navbar)
+
+//DO I NEED A BUTTON FOR LOGOUT? OR CAN IT BE ACCOMPLISHED WITH A LINK, LIKE ABOVE?
+// <Button size='small' onClick={()=>logout()}>
+// Logout
+// </Button>
