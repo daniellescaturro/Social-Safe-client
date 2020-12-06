@@ -26,7 +26,7 @@ export default function MyRestaurantsList(props) {
             Edit
           </Button>
           <Button
-            onClick={()=>props.deleteRestaurant(restaurant.id)}>
+            onClick={()=> props.deleteRestaurant(restaurant.id)}>
             Delete
           </Button>
         </Card.Content>

@@ -36,7 +36,7 @@ export default class EditRestaurantModal extends Component {
     return(
       <Modal open={true} closeIcon={true} onClose={this.props.closeModal}>
         <Header>
-          <h2>Add Restaurant</h2>
+          <h2>Edit Restaurant</h2>
         </Header>
         <Modal.Content>
         <Form onSubmit={this.handleSubmit}>
@@ -99,8 +99,8 @@ export default class EditRestaurantModal extends Component {
           <Form.Input
             type="text"
             name="state"
-            value={this.state.city}
-            placeholder="Enter city"
+            value={this.state.state}
+            placeholder="Enter state"
             onChange={this.handleChange}
           />
 

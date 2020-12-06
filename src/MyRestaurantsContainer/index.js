@@ -10,7 +10,7 @@ export default class MyRestaurantsContainer extends Component {
     this.state = {
       restaurants: [],
       idOfRestaurantToEdit: -1,
-      action: ''
+      //action: ''
     }
   }
 
@@ -20,7 +20,7 @@ export default class MyRestaurantsContainer extends Component {
 
   getRestaurants = async () => {
     try {
-      const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/"
+      const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/myfavorites"
       const restaurantsResponse = await fetch(url, {
         credentials: 'include',
       })
@@ -36,6 +36,30 @@ export default class MyRestaurantsContainer extends Component {
     }
   }
 
+
+  deleteRestaurant = async (idOfRestaurantToDelete) => {
+     try {
+       const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + idOfRestaurantToDelete
+
+       const deleteRestaurantResponse = await fetch(url, {
+         method: 'DELETE',
+         credentials: 'include'
+       })
+
+       const deleteRestaurantJson = await deleteRestaurantResponse.json()
+       console.log("deleteRestaurantJson", deleteRestaurantJson)
+
+       if(deleteRestaurantResponse.status === 200) {
+         this.setState({
+           restaurants: this.state.restaurants.filter(restaurant => restaurant.id !== idOfRestaurantToDelete)
+         })
+       }
+     } catch(err) {
+       console.log("Error deleting restaurant: ", err)
+     }
+   }
+
+
   editRestaurant = (idOfRestaurantToEdit) => {
     console.log("you are trying to edit restaurant with id: ", idOfRestaurantToEdit)
 
@@ -48,23 +72,24 @@ export default class MyRestaurantsContainer extends Component {
     try {
       const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + this.state.idOfRestaurantToEdit
 
-      const updateResponse = await fetch(url, {
+      const updateRestaurantResponse = await fetch(url, {
         method: 'PUT',
         body: JSON.stringify(updatedRestaurantInfo),
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
+          
         }
       })
 
-      console.log("updateResponse", updateResponse)
-      const updateJson = await updateResponse.json()
-      console.log("updateJson", updateJson)
+      console.log("updateRestaurantResponse", updateRestaurantResponse)
+      const updateRestaurantJson = await updateRestaurantResponse.json()
+      console.log("updateRestaurantJson", updateRestaurantJson)
 
-      if(updateResponse.status == 200) {
+      if(updateRestaurantResponse.status == 200) {
         const restaurants = this.state.restaurants
-        const indexOfRestaurantBeingUpdated = restaurants.findIndex( restaurant => restaurant.id == this.state.idOfRestaurantToEdit)
-        restaurants[indexOfRestaurantBeingUpdated] = updateJson.data
+        const indexOfRestaurantBeingUpdated = restaurants.findIndex(restaurant => restaurant.id == this.state.idOfRestaurantToEdit)
+        restaurants[indexOfRestaurantBeingUpdated] = updateRestaurantJson.data
         this.setState({
           restaurants: restaurants,
           idOfRestaurantToEdit: -1
@@ -82,40 +107,18 @@ export default class MyRestaurantsContainer extends Component {
    })
  }
 
- deleteRestaurant = async (idOfRestaurantToDelete) => {
-    try {
-      const url = process.env.REACT_APP_API_URL + "/api/v1/favorities/" + idOfRestaurantToDelete
-
-      const deleteRestaurantResponse = await fetch(url, {
-        method: 'DELETE',
-        credentials: 'include'
-      })
-
-      const deleteRestaurantJson = await deleteRestaurantResponse.json()
-      console.log("deleteRestaurantJson", deleteRestaurantJson)
-
-      if(deleteRestaurantResponse.status === 200) {
-        this.setState({
-          restaurants: this.state.restaurants.filter( restaurant => restaurant.id !== idOfRestaurantToDelete)
-        })
-      }
-    } catch(err) {
-      console.log("Error deleting restaurant: ", err)
-    }
-  }
-
 
   render() {
     return (
       <div className="myRestaurantsContainer">
-        <MyRestaurantsList restaurants={this.state.restaurants} />
+        <MyRestaurantsList restaurants={this.state.restaurants} editRestaurant={this.editRestaurant} />
 
       {
         this.state.idOfRestaurantToEdit !== -1
         &&
         <EditRestaurantModal
           restaurantToEdit={this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit)}
-          updateRestaurant={this.update.Dog}
+          updateRestaurant={this.updateRestaurant}
           closeModal={this.closeModal}
         />
       }

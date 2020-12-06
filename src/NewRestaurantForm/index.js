@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Label, Segment, Checkbox, Header } from 'semantic-ui-react'
 
-//add favorite here?
-
 export default class NewRestaurantForm extends Component {
 
   constructor(props) {
@@ -46,6 +44,31 @@ export default class NewRestaurantForm extends Component {
       heat_lamps: ''
     })
   }
+
+
+  createRestaurant = async (restaurantToAdd) => {
+      try {
+        const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/"
+        const createRestaurantResponse = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify(restaurantToAdd)
+        })
+        const createRestaurantJson = await createRestaurantResponse.json()
+
+        if(createRestaurantResponse.status === 201 || createRestaurantResponse.status === 200){
+          this.setState({
+            restaurants: [...this.state.restaurants, createRestaurantJson.data]
+          })
+        }
+
+      } catch(err) {
+        console.log("Error adding restaurant", err)
+      }
+    }
 
   render() {
     return(
@@ -113,8 +136,8 @@ export default class NewRestaurantForm extends Component {
         <Form.Input
           type="text"
           name="state"
-          value={this.state.city}
-          placeholder="Enter city"
+          value={this.state.state}
+          placeholder="Enter state"
           onChange={this.handleChange}
         />
 
@@ -129,10 +152,10 @@ export default class NewRestaurantForm extends Component {
 
         <Label horizontal>Rating:</Label>
         <Form.Input
-          type="decimal(2,1)"
+          type="decimal"
           name="rating"
           value={this.state.rating}
-          placeholder="Enter a resource"
+          placeholder="Enter a rating"
           onChange={this.handleChange}
         />
 

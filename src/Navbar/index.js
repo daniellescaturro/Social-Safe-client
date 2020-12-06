@@ -1,7 +1,9 @@
 import React from 'react'
 import { Menu, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import NewRestaurantForm from '../NewRestaurantForm'
 
+// 	ORIGINAL LOGOUT FUNCTION
 // const logout = async () => {
 //   try {
 //     const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
@@ -22,6 +24,7 @@ import { Link } from 'react-router-dom'
 //     console.error(error)
 //   }
 // }
+
 
 
 export default function Navbar(props) {
@@ -50,6 +53,14 @@ export default function Navbar(props) {
 	    console.error(error)
 	  }
 	}
+
+	//HOW DO I ENSURE THE ADD RESTAURANT FORM IS PROPERLY SYNCED UP? I TRIED THIS, BUT DON'T THINK IT'S CORRECT.
+		// <Menu.Item>
+		// 	<Link to="/add_restaurant" onClick={() => this.createRestaurant}>
+		// 	Add Restaurant
+		// 	</Link>
+		// </Menu.Item>
+
 	return (
 		<Menu secondary pointing>
 			<Menu.Item><Link to='/'>Social Safe</Link></Menu.Item>
@@ -63,9 +74,3 @@ export default function Navbar(props) {
 		</Menu>
 	)
 }
-
-
-
-// <p>Logged in as {props.email}. |&nbsp;
-// 	<span className='link' onClick={props.logout}>Log out</span>
-// </p>
