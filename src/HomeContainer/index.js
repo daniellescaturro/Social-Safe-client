@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import HomeList from '../HomeList'
+import EditRestaurantModal from '../EditRestaurantModal' //added
+import { Header } from 'semantic-ui-react'
 
+//original code before adds, except where noted.
 export default class HomeContainer extends Component {
   constructor(props) {
     super(props)
@@ -8,6 +11,7 @@ export default class HomeContainer extends Component {
       this.state = {
         restaurants: [],
         favorites: {},
+        idOfRestaurantToEdit: -1, //added
         action: ''
       }
     }
@@ -18,6 +22,7 @@ export default class HomeContainer extends Component {
       })
     }
 
+  //GET ALL RESTAURANTS
     getRestaurants = async () => {
       try {
 
@@ -47,9 +52,9 @@ export default class HomeContainer extends Component {
     }
 
     try {
-        let url = process.env.REACT_APP_API_URL + "/api/v1/favorites/myfavorites"
+        let url = process.env.REACT_APP_API_URL + "/api/v1/favorities/myfavorites"
         let res = await fetch(url, {
-          method: 'GET', //this commented out in dev-resources
+          method: 'GET',
           // mode: "no-cors",
           credentials: 'include',
           headers: {
@@ -74,11 +79,105 @@ export default class HomeContainer extends Component {
   }
 
 
+
+
+//ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
+  deleteRestaurant = async (idOfRestaurantToDelete) => {
+     try {
+       const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/" + idOfRestaurantToDelete
+
+       const deleteRestaurantResponse = await fetch(url, {
+         method: 'DELETE',
+         credentials: 'include'
+       })
+
+       const deleteRestaurantJson = await deleteRestaurantResponse.json()
+       console.log("deleteRestaurantJson", deleteRestaurantJson)
+
+       if(deleteRestaurantResponse.status === 200) {
+         this.setState({
+           restaurants: this.state.restaurants.filter(restaurant => restaurant.restaurant_id.id !== idOfRestaurantToDelete)
+         })
+       }
+     } catch(err) {
+       console.log("Error deleting restaurant: ", err)
+     }
+   }
+
+//ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
+  editRestaurant = (idOfRestaurantToEdit) => {
+    console.log("you are trying to edit restaurant with id: ", idOfRestaurantToEdit)
+
+    this.setState({
+      idOfRestaurantToEdit: idOfRestaurantToEdit
+    })
+  }
+
+//ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
+  updateRestaurant = async (updatedRestaurantInfo) => {
+    try {
+      let id = this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit).restaurant_id.id
+      const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/" + id
+
+      const updateRestaurantResponse = await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(updatedRestaurantInfo),
+        //mode: 'no-cors',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+
+        }
+      })
+
+      console.log("updateRestaurantResponse", updateRestaurantResponse)
+      const updateRestaurantJson = await updateRestaurantResponse.json()
+      console.log("updateRestaurantJson", updateRestaurantJson)
+
+      if(updateRestaurantResponse.status == 200) {
+        const restaurants = this.state.restaurants
+        const indexOfRestaurantBeingUpdated = restaurants.findIndex(restaurant => restaurant.id == this.state.idOfRestaurantToEdit)
+        restaurants[indexOfRestaurantBeingUpdated].restaurant_id =  updateRestaurantJson.data
+        this.setState({
+          restaurants: restaurants,
+          idOfRestaurantToEdit: -1
+        })
+      }
+
+    } catch(err) {
+      console.log("Error updating  info: ", err)
+    }
+  }
+
+
+//ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
+  closeModal = () => {
+   this.setState({
+     idOfRestaurantToEdit: -1
+   })
+ }
+
+//ADDED editRestaurant, deleteRestaurant, and EditRestaurantModal, THROWS ERROR THAT editRestaurant and deleteRestaurant are undefined?
   render() {
     return (
-      <div className="HomeContainer">
-        <HomeList restaurants={this.state.restaurants} favorites={this.state.favorites} />
-    </div>
+      <React.Fragment>
+        <Header as='h2' className="listHeaders">See All the Restaurants</Header>
+        <div className="HomeContainer">
+        <HomeList restaurants={this.state.restaurants} favorites={this.state.favorites}
+        editRestaurant={this.state.restaurants}
+        deleteRestaurant={this.deleteRestaurant}
+        />
+      {
+        this.state.idOfRestaurantToEdit !== -1
+        &&
+        <EditRestaurantModal
+          restaurantToEdit={this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit).restaurant_id}
+          updateRestaurant={this.updateRestaurant}
+          closeModal={this.closeModal}
+        />
+      }
+      </div>
+      </React.Fragment>
    )
   }
 }

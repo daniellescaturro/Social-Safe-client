@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MyRestaurantsList from '../MyRestaurantsList'
 import EditRestaurantModal from '../EditRestaurantModal'
+import { Header } from 'semantic-ui-react'
 
 export default class MyRestaurantsContainer extends Component {
 
@@ -119,6 +120,8 @@ export default class MyRestaurantsContainer extends Component {
 
   render() {
     return (
+      <React.Fragment>
+        <Header as='h2' className="listHeaders">My Favorites</Header>
       <div className="myRestaurantsContainer">
         <MyRestaurantsList
           restaurants={this.state.restaurants}
@@ -137,6 +140,7 @@ export default class MyRestaurantsContainer extends Component {
         />
       }
       </div>
+      </React.Fragment>
     )
   }
 

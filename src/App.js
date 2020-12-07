@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch, Redirect, Link} from 'react-router-dom';
+import Footer from './Footer'
 
 import LoginRegisterContainer from './LoginRegisterContainer'
 import Navbar from './Navbar'
@@ -25,6 +26,7 @@ function App() {
           <Protected path='/favorites' exact component={MyRestaurantsContainer}/>
           <Protected path='/add_restaurant' exact component={NewRestaurantForm}/>
         </Switch>
+        <Footer/>
       </BrowserRouter>
     </div>
   )

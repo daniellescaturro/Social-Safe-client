@@ -59,12 +59,14 @@ import '../App.css'
 
 	return (
 		<Menu secondary pointing className="navbar">
-			<Menu.Item><Icon name='glass martini' color='black'></Icon></Menu.Item>
-			<Menu.Item fontsize={18}><Link to='/'>Social Safe</Link></Menu.Item>
-			<Menu.Item><Link to="/favorites">My Favorites</Link></Menu.Item>
-			<Menu.Item><Link to="/add_restaurant">Add Restaurant</Link></Menu.Item>
-			<Menu.Item position='right'><Link to="/login">Login</Link></Menu.Item>
-			<Menu.Item><Link to="#" onClick={()=>logout()}>Logout</Link></Menu.Item>
+			<Menu.Item className='companyName'>
+        <Icon name='group' color='grey' className="logo"></Icon>
+        <Link to='/'>Social Safe</Link>
+      </Menu.Item>
+			<Menu.Item className="menuItems"><Link to="/favorites">My Favorites</Link></Menu.Item>
+			<Menu.Item className="menuItems"><Link to="/add_restaurant">Add Restaurant</Link></Menu.Item>
+			<Menu.Item position='right' className="menuItems"><Link to="/login">Login</Link></Menu.Item>
+			<Menu.Item className='menuItems'><Link to="#" onClick={()=>logout()}>Logout</Link></Menu.Item>
 		</Menu>
 	)
 }

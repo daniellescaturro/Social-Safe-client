@@ -11,9 +11,9 @@ code {
 
 .loginSubscript {
   font-size: 14px;
-  margin-left: 55px;
+  margin-left: 65px;
   margin-top: 10px;
-  color: grey;
+  color: dimgrey;
 }
 
 .link {
@@ -31,7 +31,24 @@ code {
   background-color: #74BCCC  !important;
   color: ghostwhite !important;
   vertical-align: center !important;
+  margin-bottom: 45px !important;
+  font-size: 15px !important;
+  height: 75px;
+}
+
+.logo {
+  margin-right: 10px !important;
+  padding: 0 !important
+}
+
+.companyName {
   font-size: 18px !important;
+  padding-bottom: 23px !important;
+}
+
+.menuItems {
+  padding-bottom: 23px !important;
+  color: ghostwhite !important;
 }
 
 .form {
@@ -39,7 +56,21 @@ code {
   margin: 0 auto !important;
   text-align: left;
 }
+
 .formHeader {
   margin-top: 15px !important;
   margin-left: 30px !important;
+  color: dimgrey !important;
+}
+
+.listHeaders {
+  color: dimgrey !important;
+  margin-bottom: 20px !important;
+}
+
+
+.footer {
+  background-color: #0F7880 !important;
+  color: ghostwhite !important;
+  font-size: 15px !important;
 }

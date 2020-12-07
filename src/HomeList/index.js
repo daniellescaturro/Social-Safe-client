@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Component} from 'react'
-import { Card, Image, Button, Icon, Grid } from 'semantic-ui-react'
-//import MyRestaurantsList from '../MyRestaurantsList'
+import { Card, Image, Button, Icon, Grid, Header, Segment } from 'semantic-ui-react'
 import '../index.css'
 
 const RenderRestaurant = ({restaurant, favorite}) => {
@@ -72,7 +71,23 @@ const RenderRestaurant = ({restaurant, favorite}) => {
         <Card.Meta>Rating: {restaurant.rating}</Card.Meta>
         <Card.Meta>Heat Lamps: {restaurant.heat_lamps==true?'Yes':'No'}</Card.Meta>
       </Card.Content>
-      
+      {
+        JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
+        ?
+        <Card.Content extra>
+          <Button
+            basic color='brown' onClick={()=> this.state.editRestaurant(restaurant.id)}>
+            Edit
+          </Button>
+          <Button
+            basic color='brown'
+            onClick={()=> this.state.deleteRestaurant(restaurant.id)}>
+            Delete
+          </Button>
+        </Card.Content>
+        :
+        ''
+      }
       <Card.Content extra>
         <Button onClick={()=> { handleClick()}} icon>
           { isFavorite ? <Icon name='heart' color='pink' /> : <Icon name='heart outline' color='pink' /> }
@@ -80,6 +95,7 @@ const RenderRestaurant = ({restaurant, favorite}) => {
         <Button color='brown'>Review</Button>
       </Card.Content>
     </Card>
+
   )
 }
 

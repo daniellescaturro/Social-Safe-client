@@ -45,7 +45,7 @@ handleSubmit = (event) => {
   render() {
     return (
       <div className='form'>
-        <Header className='formHeader' as='h2' color='grey'>{this.state.action} Here</Header>
+        <Header className='formHeader' as='h2' color='black'>{this.state.action} Here</Header>
         <Form onSubmit={this.handleSubmit}>
         {
          this.state.action === "Register"
