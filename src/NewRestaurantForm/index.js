@@ -161,15 +161,6 @@ export default class NewRestaurantForm extends Component {
           onChange={this.handleChange}
         />
 
-        <Label horizontal>Social Distancing Rating:</Label>
-        <Form.Input
-          type="number"
-          name="rating"
-          value={this.state.rating}
-          placeholder="Enter a resource"
-          onChange={this.handleChange}
-        />
-
         <Label horizontal>Heat Lamps:</Label>
         <Form.Input
           control={Checkbox}
@@ -184,3 +175,12 @@ export default class NewRestaurantForm extends Component {
     )
   }
 }
+
+// <Label horizontal>Social Distancing Rating:</Label>
+// <Form.Input
+//   type="number"
+//   name="rating"
+//   value={this.state.rating}
+//   placeholder="Enter a resource"
+//   onChange={this.handleChange}
+// />

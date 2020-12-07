@@ -1,6 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState} from 'react'
 import { Card, Image, Button, Icon } from 'semantic-ui-react'
 import '../index.css'
+
+
+const Fav = ({restaurant, favorite, removeFavorite}) => {
+  let f = false
+  if(favorite != undefined) {
+      f = favorite.favorite
+
+  }
+  const [isFavorite, setFavorite] = useState(f);
+  useEffect(()=> { setFavorite(f) }, [f])
+  const handleClick = async () => {
+
+    try {
+      if(favorite != undefined){
+        const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + favorite.id
+        const updatedFavoriteInfo = {favorite: !isFavorite}
+        const updateResponse = await fetch(url, {
+          method: 'PUT',
+          body: JSON.stringify(updatedFavoriteInfo),
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+
+        console.log("updateResponse", updateResponse)
+        const updateJson = await updateResponse.json()
+        console.log("updateJson", updateJson)
+
+        if(updateResponse.status == 200) {
+        }
+      }else{
+        const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + restaurant.id
+        const updatedFavoriteInfo = { favorite: !isFavorite }
+        const updateResponse = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(updatedFavoriteInfo),
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+
+        console.log("updateResponse", updateResponse)
+        const updateJson = await updateResponse.json()
+        console.log("updateJson", updateJson)
+
+        if(updateResponse.status == 200) {
+          // update favorite state
+        }
+      }
+      setFavorite(!isFavorite)
+      removeFavorite(favorite)
+
+    } catch(err) {
+      console.log("Error updating  info: ", err)
+    }
+
+  }
+  return(
+
+        <Button onClick={()=> { handleClick()}} icon>
+          { isFavorite ? <Icon name='heart' color='pink' /> : <Icon name='heart outline' color='pink' /> }
+        </Button>
+  )
+}
 
 export default function MyRestaurantsList(props) {
   const restaurants = props.restaurants.map(fav => {
@@ -14,11 +80,9 @@ export default function MyRestaurantsList(props) {
           </Card.Header>
           <Card.Meta>{restaurant.title}</Card.Meta>
           <Card.Meta>{restaurant.address1}</Card.Meta>
-          <Card.Meta>{restaurant.city}</Card.Meta>
-          <Card.Meta>{restaurant.state}</Card.Meta>
-          <Card.Meta>{restaurant.zip_code}</Card.Meta>
+          <Card.Meta>{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
           <Card.Meta>Rating: {restaurant.rating}</Card.Meta>
-          <Card.Meta>Heat Lamps: {restaurant.heat_lamps == true ? 'yes': 'No'}</Card.Meta>
+          <Card.Meta>Heat Lamps: {restaurant.heat_lamps == true ? 'Yes': 'No'}</Card.Meta>
         </Card.Content>
         {
           JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
@@ -37,11 +101,12 @@ export default function MyRestaurantsList(props) {
           :
           ''
         }
-
         <Card.Content extra>
-          <Button icon>
-            <Icon name='heart' color='pink' />
-          </Button>
+          <Fav
+            restaurant={restaurant}
+            favorite={fav}
+            removeFavorite={props.removeFavorite}
+            />
           <Button color='brown'>Review</Button>
         </Card.Content>
       </Card>

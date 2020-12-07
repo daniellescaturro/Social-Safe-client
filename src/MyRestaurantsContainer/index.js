@@ -18,6 +18,13 @@ export default class MyRestaurantsContainer extends Component {
     this.getRestaurants()
   }
 
+  removeFavorite = (fav) =>{
+    let temp = this.state.restaurants.filter(res=>res.id !== fav.id)
+    this.setState({
+      restaurants: temp
+    })
+  }
+
   getRestaurants = async () => {
     try {
       const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/myfavorites"
@@ -39,7 +46,7 @@ export default class MyRestaurantsContainer extends Component {
 
   deleteRestaurant = async (idOfRestaurantToDelete) => {
      try {
-       const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + idOfRestaurantToDelete
+       const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/" + idOfRestaurantToDelete
 
        const deleteRestaurantResponse = await fetch(url, {
          method: 'DELETE',
@@ -51,7 +58,7 @@ export default class MyRestaurantsContainer extends Component {
 
        if(deleteRestaurantResponse.status === 200) {
          this.setState({
-           restaurants: this.state.restaurants.filter(restaurant => restaurant.id !== idOfRestaurantToDelete)
+           restaurants: this.state.restaurants.filter(restaurant => restaurant.restaurant_id.id !== idOfRestaurantToDelete)
          })
        }
      } catch(err) {
@@ -70,7 +77,8 @@ export default class MyRestaurantsContainer extends Component {
 
   updateRestaurant = async (updatedRestaurantInfo) => {
     try {
-      const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + this.state.idOfRestaurantToEdit
+      let id = this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit).restaurant_id.id
+      const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/" + id
 
       const updateRestaurantResponse = await fetch(url, {
         method: 'PUT',
@@ -90,7 +98,7 @@ export default class MyRestaurantsContainer extends Component {
       if(updateRestaurantResponse.status == 200) {
         const restaurants = this.state.restaurants
         const indexOfRestaurantBeingUpdated = restaurants.findIndex(restaurant => restaurant.id == this.state.idOfRestaurantToEdit)
-        restaurants[indexOfRestaurantBeingUpdated] = updateRestaurantJson.data
+        restaurants[indexOfRestaurantBeingUpdated].restaurant_id =  updateRestaurantJson.data
         this.setState({
           restaurants: restaurants,
           idOfRestaurantToEdit: -1
@@ -112,7 +120,12 @@ export default class MyRestaurantsContainer extends Component {
   render() {
     return (
       <div className="myRestaurantsContainer">
-        <MyRestaurantsList restaurants={this.state.restaurants} editRestaurant={this.editRestaurant} />
+        <MyRestaurantsList
+          restaurants={this.state.restaurants}
+          editRestaurant={this.editRestaurant}
+          removeFavorite={this.removeFavorite}
+          deleteRestaurant={this.deleteRestaurant}
+          />
 
       {
         this.state.idOfRestaurantToEdit !== -1

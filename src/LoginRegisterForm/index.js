@@ -84,11 +84,11 @@ handleSubmit = (event) => {
         {
           this.state.action === "Login"
           ?
-          <p>
+          <p className='loginSubscript'>
             Need an account? Sign up <span className="link" onClick={this.switchForm}>here</span>.
           </p>
           :
-          <p>
+          <p className='loginSubscript'>
             Already have an account? Log in <span className="link" onClick={this.switchForm}>here</span>.
           </p>
 

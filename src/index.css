@@ -9,6 +9,13 @@ code {
     monospace;
 }
 
+.loginSubscript {
+  font-size: 14px;
+  margin-left: 55px;
+  margin-top: 10px;
+  color: grey;
+}
+
 .link {
   cursor: pointer;
   color: #3B83C0;

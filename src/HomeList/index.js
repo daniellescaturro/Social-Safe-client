@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Component} from 'react'
 import { Card, Image, Button, Icon, Grid } from 'semantic-ui-react'
+//import MyRestaurantsList from '../MyRestaurantsList'
 import '../index.css'
 
 const RenderRestaurant = ({restaurant, favorite}) => {
@@ -67,12 +68,11 @@ const RenderRestaurant = ({restaurant, favorite}) => {
         </Card.Header>
         <Card.Meta>{restaurant.title}</Card.Meta>
         <Card.Meta>{restaurant.address1}</Card.Meta>
-        <Card.Meta>{restaurant.city}</Card.Meta>
-        <Card.Meta>{restaurant.state}</Card.Meta>
-        <Card.Meta>{restaurant.zip_code}</Card.Meta>
+        <Card.Meta>{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
         <Card.Meta>Rating: {restaurant.rating}</Card.Meta>
-        <Card.Meta>Heat Lamps: {restaurant.heat_lamps==true?'yes':'no'}</Card.Meta>
+        <Card.Meta>Heat Lamps: {restaurant.heat_lamps==true?'Yes':'No'}</Card.Meta>
       </Card.Content>
+      
       <Card.Content extra>
         <Button onClick={()=> { handleClick()}} icon>
           { isFavorite ? <Icon name='heart' color='pink' /> : <Icon name='heart outline' color='pink' /> }
@@ -95,3 +95,22 @@ export default function HomeList(props) {
   )
 
 }
+
+//ADDED EDITS AND DELETE BUTTONS FOR CURRENT USER. COPIED FROM MYRESTLIST, BUT THREW ERRORS.
+// {
+//   JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
+//   ?
+//   <Card.Content extra>
+//     <Button
+//       basic color='brown' onClick={()=> props.editRestaurant(fav.id)}>
+//       Edit
+//     </Button>
+//     <Button
+//       basic color='brown'
+//       onClick={()=> props.deleteRestaurant(restaurant.id)}>
+//       Delete
+//     </Button>
+//   </Card.Content>
+//   :
+//   ''
+// }
