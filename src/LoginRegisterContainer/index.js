@@ -41,6 +41,9 @@ register = async (registerInfo) => {
        loggedIn: true,
        loggedInUserEmail: registerJson.data.email
        })
+       localStorage.setItem('active', 'active')
+       localStorage.setItem('userData', JSON.stringify(registerJson.data))
+       this.props.history.push('/');
      }
   } catch(err) {
     console.error("Error trying to register with API")

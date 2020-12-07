@@ -52,7 +52,7 @@ export default class HomeContainer extends Component {
     }
 
     try {
-        let url = process.env.REACT_APP_API_URL + "/api/v1/favorities/myfavorites"
+        let url = process.env.REACT_APP_API_URL + "/api/v1/favorites/myfavorites"
         let res = await fetch(url, {
           method: 'GET',
           // mode: "no-cors",
@@ -116,8 +116,7 @@ export default class HomeContainer extends Component {
 //ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
   updateRestaurant = async (updatedRestaurantInfo) => {
     try {
-      let id = this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit).restaurant_id.id
-      const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/" + id
+      const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/" + this.state.idOfRestaurantToEdit
 
       const updateRestaurantResponse = await fetch(url, {
         method: 'PUT',
@@ -137,7 +136,7 @@ export default class HomeContainer extends Component {
       if(updateRestaurantResponse.status == 200) {
         const restaurants = this.state.restaurants
         const indexOfRestaurantBeingUpdated = restaurants.findIndex(restaurant => restaurant.id == this.state.idOfRestaurantToEdit)
-        restaurants[indexOfRestaurantBeingUpdated].restaurant_id =  updateRestaurantJson.data
+        restaurants[indexOfRestaurantBeingUpdated] =  updateRestaurantJson.data
         this.setState({
           restaurants: restaurants,
           idOfRestaurantToEdit: -1
@@ -163,15 +162,18 @@ export default class HomeContainer extends Component {
       <React.Fragment>
         <Header as='h2' className="listHeaders">See All the Restaurants</Header>
         <div className="HomeContainer">
-        <HomeList restaurants={this.state.restaurants} favorites={this.state.favorites}
-        editRestaurant={this.state.restaurants}
-        deleteRestaurant={this.deleteRestaurant}
+        <HomeList
+          restaurants={this.state.restaurants}
+          favorites={this.state.favorites}
+          editRestaurant={this.editRestaurant}
+          deleteRestaurant={this.deleteRestaurant}
+          updateRestaurant={this.updateRestaurant}
         />
       {
         this.state.idOfRestaurantToEdit !== -1
         &&
         <EditRestaurantModal
-          restaurantToEdit={this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit).restaurant_id}
+          restaurantToEdit={this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit)}
           updateRestaurant={this.updateRestaurant}
           closeModal={this.closeModal}
         />

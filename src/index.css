@@ -47,7 +47,7 @@ code {
 }
 
 .menuItems {
-  padding-bottom: 23px !important;
+  padding-bottom: 24px !important;
   color: ghostwhite !important;
 }
 
@@ -73,4 +73,5 @@ code {
   background-color: #0F7880 !important;
   color: ghostwhite !important;
   font-size: 15px !important;
+  margin-top: 50px !important;
 }

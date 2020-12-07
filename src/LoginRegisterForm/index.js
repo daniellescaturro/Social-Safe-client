@@ -89,7 +89,7 @@ handleSubmit = (event) => {
           </p>
           :
           <p className='loginSubscript'>
-            Already have an account? Log in <span className="link" onClick={this.switchForm}>here</span>.
+            Already have an account? Login <span className="link" onClick={this.switchForm}>here</span>.
           </p>
 
         }

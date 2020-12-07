@@ -2,7 +2,7 @@ import React, { useState, useEffect, Component} from 'react'
 import { Card, Image, Button, Icon, Grid, Header, Segment } from 'semantic-ui-react'
 import '../index.css'
 
-const RenderRestaurant = ({restaurant, favorite}) => {
+const RenderRestaurant = ({restaurant, favorite, editRestaurant, deleteRestaurant}) => {
   let f = false
   if(favorite != undefined) {
       f = favorite.favorite
@@ -76,12 +76,12 @@ const RenderRestaurant = ({restaurant, favorite}) => {
         ?
         <Card.Content extra>
           <Button
-            basic color='brown' onClick={()=> this.state.editRestaurant(restaurant.id)}>
+            basic color='brown' onClick={()=> editRestaurant(restaurant.id)}>
             Edit
           </Button>
           <Button
             basic color='brown'
-            onClick={()=> this.state.deleteRestaurant(restaurant.id)}>
+            onClick={()=> deleteRestaurant(restaurant.id)}>
             Delete
           </Button>
         </Card.Content>
@@ -102,7 +102,13 @@ const RenderRestaurant = ({restaurant, favorite}) => {
 export default function HomeList(props) {
 
   const restaurantsToDisplay = props.restaurants.map(restaurant => {
-    return <RenderRestaurant restaurant={restaurant} favorite={props.favorites[restaurant.id]} key={restaurant.id}/>
+    return <RenderRestaurant
+              restaurant={restaurant}
+              favorite={props.favorites[restaurant.id]}
+              key={restaurant.id}
+              deleteRestaurant={props.deleteRestaurant}
+              editRestaurant={props.editRestaurant}
+              />
   })
   return(
     <Card.Group centered={true}>

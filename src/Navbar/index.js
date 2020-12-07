@@ -60,13 +60,13 @@ import '../App.css'
 	return (
 		<Menu secondary pointing className="navbar">
 			<Menu.Item className='companyName'>
-        <Icon name='group' color='grey' className="logo"></Icon>
+        <Icon name='food' color='grey' className="logo"></Icon>
         <Link to='/'>Social Safe</Link>
       </Menu.Item>
 			<Menu.Item className="menuItems"><Link to="/favorites">My Favorites</Link></Menu.Item>
 			<Menu.Item className="menuItems"><Link to="/add_restaurant">Add Restaurant</Link></Menu.Item>
-			<Menu.Item position='right' className="menuItems"><Link to="/login">Login</Link></Menu.Item>
-			<Menu.Item className='menuItems'><Link to="#" onClick={()=>logout()}>Logout</Link></Menu.Item>
+			<Menu.Item position='right' className="menuItems"><Button><Icon name='sign in'/><Link to="/login">Login</Link></Button></Menu.Item>
+			<Menu.Item className='menuItems'><Button><Icon name='log out'/><Link to="#" onClick={()=>logout()}>Logout</Link></Button></Menu.Item>
 		</Menu>
 	)
 }

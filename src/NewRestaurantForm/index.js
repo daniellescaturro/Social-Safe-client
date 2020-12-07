@@ -18,14 +18,24 @@ export default class NewRestaurantForm extends Component {
       state: '',
       zip_code: '',
       rating: '',
-      heat_lamps: ''
+      heat_lamps: false
     }
   }
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+  handleChange = (event, data) => {
+    console.log(event.target, data)
+    if(data.type === 'checkbox'){
+
+      this.setState({
+        ['heat_lamps']: data.checked
+      })
+    }else{
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+    }
+    console.log(event.target)
+
   }
 
   handleSubmit = (event) => {
@@ -43,7 +53,7 @@ export default class NewRestaurantForm extends Component {
       state: '',
       zip_code: '',
       rating: '',
-      heat_lamps: ''
+      heat_lamps: false
     })
   }
 
@@ -160,12 +170,10 @@ export default class NewRestaurantForm extends Component {
           placeholder="Enter a rating"
           onChange={this.handleChange}
         />
-
-        <Label horizontal>Heat Lamps:</Label>
+        <Label horizontal>Heat Lamps: </Label>
         <Form.Input
           control={Checkbox}
-          name="heat_lamps"
-          value={this.state.heat_lamps}
+          checked={this.state.heat_lamps}
           onChange={this.handleChange}
         />
 
