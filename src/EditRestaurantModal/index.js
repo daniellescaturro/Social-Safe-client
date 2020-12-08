@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Modal, Button, Label, Segment, Checkbox, Header } from 'semantic-ui-react'
+import '../index.css'
 
 export default class EditRestaurantModal extends Component {
 
@@ -20,19 +21,19 @@ export default class EditRestaurantModal extends Component {
     }
   }
 
-  handleChange = (event) => {
-    //console.log(event.target, data)
-    // if(data.type === 'checkbox'){
-    //
-    //   this.setState({
-    //     ['heat_lamps']: data.checked
-    //   })
-    // }else{
+  handleChange = (event, data) => {
+    console.log(event.target, data)
+    if(data.type === 'checkbox'){
+
+      this.setState({
+        ['heat_lamps']: data.checked
+      })
+    }else{
       this.setState({
         [event.target.name]: event.target.value
       })
-    // }
-    // console.log(event.target)
+    }
+    console.log(event.target)
   }
 
   handleSubmit = (event) => {
@@ -132,7 +133,7 @@ export default class EditRestaurantModal extends Component {
           <Label horizontal>Heat Lamps:</Label>
           <Form.Input
             control={Checkbox}
-            value={this.state.heat_lamps}
+            checked={this.state.heat_lamps}
             onChange={this.handleChange}
           />
 

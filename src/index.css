@@ -68,6 +68,20 @@ code {
   margin-bottom: 20px !important;
 }
 
+.restaurantCategory {
+  font-size: 15px !important;
+  color: dimgrey !important;
+}
+
+.address {
+  margin-bottom: 10px !important;
+}
+
+.cardDetail {
+  fontsize: 13px !important;
+  color: dimgrey !important;
+}
+
 
 .footer {
   background-color: #0F7880 !important;

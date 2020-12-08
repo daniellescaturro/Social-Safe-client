@@ -74,6 +74,14 @@ const RenderRestaurant = ({
 
   }
 
+  const  calculateAvgSS = (reviews) => {
+    let total = 0
+    reviews.forEach((item, i) => {
+        total += item.rating
+    });
+    return total / reviews.length
+  }
+
   return(
     <Card color='brown' key={restaurant.id}>
       <Image centered={true} className="restaurantImage" src={restaurant.image_url} />
@@ -81,13 +89,14 @@ const RenderRestaurant = ({
         <Card.Header>
           <a href={restaurant.url}>{restaurant.name}</a>
         </Card.Header>
-        <Card.Meta>{restaurant.title}</Card.Meta>
+        <p className="restaurantCategory">{restaurant.title}</p>
         <Card.Meta>{restaurant.address1}</Card.Meta>
-        <Card.Meta>{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
-        <Card.Meta> Yelp Rating: {restaurant.rating}</Card.Meta>
-        <Card.Meta>Social Distance Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</Card.Meta>
-        <Card.Meta>Heat Lamps: {restaurant.heat_lamps==true?'Yes':'No'}</Card.Meta>
-        <Link to={`/restaurants/${restaurant.id}`}>See details</Link>
+        <Card.Meta className="address">{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
+        <p className="cardDetail"> Yelp Rating: {restaurant.rating}</p>
+        <p className="cardDetail">Social Safe Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvgSS(restaurant.reviews) }</p>
+        <p className="cardDetail">Social Distance Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
+        <p className="cardDetail">Heat Lamps: {restaurant.heat_lamps==true?'Yes':'No'}</p>
+        <Link to={`/restaurants/${restaurant.id}`}>[See Details]</Link>
       </Card.Content>
       {
         JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id

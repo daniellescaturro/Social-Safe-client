@@ -75,14 +75,26 @@ const  calculateAvg = (reviews) => {
       total += item.social_distancing_rating
   });
   return total / reviews.length
-
 }
 
-// ADDED SOC DISTANCE RATING TO RETURN, THREW UNDEFINED ERROR ON RESTAURANT_ID. TRIED SEVERAL THINGS, CLD'NT GET TO WORK.
-// <Card.Meta>Social Distance Rating: {restaurant_id.reviews.length== 0 ? "Not yet rated" : calculateAvg(restaurant_id.reviews) }</Card.Meta>
+const  calculateAvgSS = (reviews) => {
+  let total = 0
+  reviews.forEach((item, i) => {
+      total += item.rating
+  });
+  return total / reviews.length
+}
 
+// ADDED SOC DISTANCE RATING TO RETURN, THREW UNDEFINED ERROR ON RESTAURANT_ID. TRIED SEVERAL THINGS, CLD'NT GET TO WORK. (Variations tried.)
+// <p className="cardDetail">Social Distance Rating: {restaurant_id.reviews.length== 0 ? "Not yet rated" : calculateAvg(restaurant_id.reviews) }</p>
+//<Card.Meta>Social Distance Rating: {restaurant.restaurant_id.reviewRestautaurant.length== 0 ? "Not yet rated" : calculateAvg(restaurant.restaurant_id.reviews) }</Card.Meta>
+//<Card.Meta>Social Distance Rating: {fav.reviews.length== 0 ? "Not yet rated" : calculateAvg(fav.reviews) }</Card.Meta>
+
+//ONCE SOCIAL DISTANCE RATING WORKING, ALSO ADD OVERALL SS RATING
+// <p className="cardDetail">Social Safe Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvg(restaurant_id.reviews) }</p>
 
 export default function MyRestaurantsList(props) {
+  console.log(props)
   const restaurants = props.restaurants.map(fav => {
     let restaurant = fav.restaurant_id
     return (
@@ -92,12 +104,14 @@ export default function MyRestaurantsList(props) {
           <Card.Header>
             <a href={restaurant.url}>{restaurant.name}</a>
           </Card.Header>
-          <Card.Meta>{restaurant.title}</Card.Meta>
+          <p className="restaurantCategory">{restaurant.title}</p>
           <Card.Meta>{restaurant.address1}</Card.Meta>
-          <Card.Meta>{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
-          <Card.Meta>Yelp Rating: {restaurant.rating}</Card.Meta>
-          <Card.Meta>Heat Lamps: {restaurant.heat_lamps == true ? 'Yes': 'No'}</Card.Meta>
-          <Link to={`/restaurants/${restaurant.id}`}>See details</Link>
+          <Card.Meta className="address">{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
+          <p className="cardDetail">Yelp Rating: {restaurant.rating}</p>
+          <p>Social Distance Rating: {restaurant.reviews.length== 0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
+
+          <p className="cardDetail">Heat Lamps: {restaurant.heat_lamps == true ? 'Yes': 'No'}</p>
+          <Link to={`/restaurants/${restaurant.id}`}>[See Details]</Link>
         </Card.Content>
         {
           JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
