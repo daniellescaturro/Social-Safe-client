@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MyRestaurantsList from '../MyRestaurantsList'
 import EditRestaurantModal from '../EditRestaurantModal'
+import ReviewModal from '../ReviewModal'
 import { Header } from 'semantic-ui-react'
 
 export default class MyRestaurantsContainer extends Component {
@@ -11,6 +12,7 @@ export default class MyRestaurantsContainer extends Component {
     this.state = {
       restaurants: [],
       idOfRestaurantToEdit: -1,
+      idOfRestaurantToReview: -1,
       action: ''
     }
   }
@@ -76,6 +78,12 @@ export default class MyRestaurantsContainer extends Component {
     })
   }
 
+  reviewRestaurant = (idOfRestaurantToReview) => {
+    this.setState({
+      idOfRestaurantToReview: idOfRestaurantToReview
+    })
+  }
+
   updateRestaurant = async (updatedRestaurantInfo) => {
     try {
       let id = this.state.restaurants.find((restaurant) => restaurant.id === this.state.idOfRestaurantToEdit).restaurant_id.id
@@ -117,6 +125,12 @@ export default class MyRestaurantsContainer extends Component {
    })
  }
 
+ closeReviewModal = () => {
+   this.setState({
+     idOfRestaurantToReview: -1
+   })
+ }
+
 
   render() {
     return (
@@ -128,6 +142,7 @@ export default class MyRestaurantsContainer extends Component {
           editRestaurant={this.editRestaurant}
           removeFavorite={this.removeFavorite}
           deleteRestaurant={this.deleteRestaurant}
+          reviewRestaurant={this.reviewRestaurant}
           />
 
       {
@@ -139,6 +154,16 @@ export default class MyRestaurantsContainer extends Component {
           closeModal={this.closeModal}
         />
       }
+
+      {
+        this.state.idOfRestaurantToReview !== -1
+        &&
+        <ReviewModal
+          closeModal={this.closeReviewModal}
+          idOfRestaurantToReview={this.state.idOfRestaurantToReview}
+        />
+      }
+
       </div>
       </React.Fragment>
     )

@@ -35,7 +35,6 @@ export default class NewRestaurantForm extends Component {
       })
     }
     console.log(event.target)
-
   }
 
   handleSubmit = (event) => {
@@ -166,6 +165,8 @@ export default class NewRestaurantForm extends Component {
         <Form.Input
           type="number"
           name="rating"
+          max="5"
+          min="1"
           value={this.state.rating}
           placeholder="Enter a rating"
           onChange={this.handleChange}
@@ -183,12 +184,3 @@ export default class NewRestaurantForm extends Component {
     )
   }
 }
-
-// <Label horizontal>Social Distancing Rating:</Label>
-// <Form.Input
-//   type="number"
-//   name="rating"
-//   value={this.state.rating}
-//   placeholder="Enter a resource"
-//   onChange={this.handleChange}
-// />

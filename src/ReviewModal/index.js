@@ -12,7 +12,6 @@ export default class ReviewModal extends Component {
     super(props)
 
     this.state = {
-      favorite: '',
       rating: '',
       social_distancing_rating: '',
       heat_lamps: false,
@@ -20,10 +19,19 @@ export default class ReviewModal extends Component {
     }
   }
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+  handleChange = (event, data) => {
+    console.log(event.target, data)
+    if(data.type === 'checkbox'){
+
+      this.setState({
+        ['heat_lamps']: data.checked
+      })
+    }else{
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+    }
+    console.log(event.target)
   }
 
   handleSubmit = (event) => {
@@ -32,7 +40,6 @@ export default class ReviewModal extends Component {
     this.createReview(this.state)
 
     this.setState({
-      favorite: '',
       rating: '',
       social_distancing_rating: '',
       heat_lamps: false,
@@ -82,18 +89,19 @@ export default class ReviewModal extends Component {
             onChange={this.handleChange}
           />
 
-          <Label horizontal>Social Distancing Rating:</Label>
+          <Label horizontal>Social Distance Rating:</Label>
           <Form.Input
             type="number"
             name="social_distancing_rating"
+            max="5"
+            min="1"
             onChange={this.handleChange}
           />
 
           <Label horizontal>Heat Lamps:</Label>
           <Form.Input
-            type="boolean"
             control={Checkbox}
-            name="heat_lamps"
+            checked={this.state.heat_lamps}
             onChange={this.handleChange}
           />
 

@@ -16,15 +16,23 @@ export default class EditRestaurantModal extends Component {
       state: props.restaurantToEdit.state,
       zip_code: props.restaurantToEdit.zip_code,
       rating: props.restaurantToEdit.rating,
-      //social_distancing_rating: props.restaurantToEdit, //this is in my Review model, but want data entry available here, if possible
       heat_lamps: props.restaurantToEdit.heat_lamps
     }
   }
 
   handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+    //console.log(event.target, data)
+    // if(data.type === 'checkbox'){
+    //
+    //   this.setState({
+    //     ['heat_lamps']: data.checked
+    //   })
+    // }else{
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+    // }
+    // console.log(event.target)
   }
 
   handleSubmit = (event) => {
@@ -124,7 +132,6 @@ export default class EditRestaurantModal extends Component {
           <Label horizontal>Heat Lamps:</Label>
           <Form.Input
             control={Checkbox}
-            name="heat_lamps"
             value={this.state.heat_lamps}
             onChange={this.handleChange}
           />
@@ -138,12 +145,3 @@ export default class EditRestaurantModal extends Component {
     )
   }
 }
-
-// <Label horizontal>Social Distancing Rating:</Label>
-// <Form.Input
-//   type="number"
-//   name="rating"
-//   value={this.state.social_distancing_rating}
-//   placeholder="Enter a social distancing rating"
-//   onChange={this.handleChange}
-// />

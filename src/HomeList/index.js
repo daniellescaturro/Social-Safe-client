@@ -73,6 +73,7 @@ const RenderRestaurant = ({
     return total / reviews.length
 
   }
+
   return(
     <Card color='brown' key={restaurant.id}>
       <Image centered={true} className="restaurantImage" src={restaurant.image_url} />
@@ -83,8 +84,8 @@ const RenderRestaurant = ({
         <Card.Meta>{restaurant.title}</Card.Meta>
         <Card.Meta>{restaurant.address1}</Card.Meta>
         <Card.Meta>{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
-        <Card.Meta>Rating: {restaurant.rating}</Card.Meta>
-        <Card.Meta>Rating: {restaurant.reviews.length== 0 ? "No ratings yet" : calculateAvg(restaurant.reviews) }</Card.Meta>
+        <Card.Meta> Yelp Rating: {restaurant.rating}</Card.Meta>
+        <Card.Meta>Social Distance Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</Card.Meta>
         <Card.Meta>Heat Lamps: {restaurant.heat_lamps==true?'Yes':'No'}</Card.Meta>
         <Link to={`/restaurants/${restaurant.id}`}>See details</Link>
       </Card.Content>
@@ -135,22 +136,3 @@ export default function HomeList(props) {
   )
 
 }
-
-//ADDED EDITS AND DELETE BUTTONS FOR CURRENT USER. COPIED FROM MYRESTLIST, BUT THREW ERRORS.
-// {
-//   JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
-//   ?
-//   <Card.Content extra>
-//     <Button
-//       basic color='brown' onClick={()=> props.editRestaurant(fav.id)}>
-//       Edit
-//     </Button>
-//     <Button
-//       basic color='brown'
-//       onClick={()=> props.deleteRestaurant(restaurant.id)}>
-//       Delete
-//     </Button>
-//   </Card.Content>
-//   :
-//   ''
-// }

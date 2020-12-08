@@ -12,7 +12,7 @@ export default class HomeContainer extends Component {
       this.state = {
         restaurants: [],
         favorites: {},
-        idOfRestaurantToEdit: -1, //added
+        idOfRestaurantToEdit: -1,
         idOfRestaurantToReview: -1,
         action: ''
       }
@@ -24,7 +24,6 @@ export default class HomeContainer extends Component {
       })
     }
 
-  //GET ALL RESTAURANTS
     getRestaurants = async () => {
       try {
 
@@ -33,12 +32,12 @@ export default class HomeContainer extends Component {
         console.log("about to fetch data from:")
         console.log(url)
         const restaurantsResponse = await fetch(url, {
-        method: 'GET', //this commented out in dev-resources
+        method: 'GET',
         // mode: "no-cors",
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
-        } //headers commented out in dev-resources
+        }
       })
       console.log(restaurantsResponse)
       const restaurantsJson = await restaurantsResponse.json()
@@ -83,7 +82,6 @@ export default class HomeContainer extends Component {
 
 
 
-//ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
   deleteRestaurant = async (idOfRestaurantToDelete) => {
      try {
        const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/" + idOfRestaurantToDelete
@@ -106,7 +104,7 @@ export default class HomeContainer extends Component {
      }
    }
 
-//ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
+
   editRestaurant = (idOfRestaurantToEdit) => {
     console.log("you are trying to edit restaurant with id: ", idOfRestaurantToEdit)
 
@@ -120,7 +118,7 @@ export default class HomeContainer extends Component {
       idOfRestaurantToReview: idOfRestaurantToReview
     })
   }
-//ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
+
   updateRestaurant = async (updatedRestaurantInfo) => {
     try {
       const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/" + this.state.idOfRestaurantToEdit
@@ -156,7 +154,6 @@ export default class HomeContainer extends Component {
   }
 
 
-//ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
   closeModal = () => {
    this.setState({
      idOfRestaurantToEdit: -1
@@ -169,7 +166,7 @@ export default class HomeContainer extends Component {
     })
   }
 
-//ADDED editRestaurant, deleteRestaurant, and EditRestaurantModal, THROWS ERROR THAT editRestaurant and deleteRestaurant are undefined?
+
   render() {
     return (
       <React.Fragment>
@@ -182,6 +179,7 @@ export default class HomeContainer extends Component {
           deleteRestaurant={this.deleteRestaurant}
           reviewRestaurant={this.reviewRestaurant}
         />
+
       {
         this.state.idOfRestaurantToEdit !== -1
         &&

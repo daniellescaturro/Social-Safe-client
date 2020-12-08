@@ -1,4 +1,5 @@
 import React, { useEffect, useState} from 'react'
+import { Link } from 'react-router-dom'
 import { Card, Image, Button, Icon } from 'semantic-ui-react'
 import '../index.css'
 
@@ -68,6 +69,19 @@ const Fav = ({restaurant, favorite, removeFavorite}) => {
   )
 }
 
+const  calculateAvg = (reviews) => {
+  let total = 0
+  reviews.forEach((item, i) => {
+      total += item.social_distancing_rating
+  });
+  return total / reviews.length
+
+}
+
+// ADDED SOC DISTANCE RATING TO RETURN, THREW UNDEFINED ERROR ON RESTAURANT_ID. TRIED SEVERAL THINGS, CLD'NT GET TO WORK.
+// <Card.Meta>Social Distance Rating: {restaurant_id.reviews.length== 0 ? "Not yet rated" : calculateAvg(restaurant_id.reviews) }</Card.Meta>
+
+
 export default function MyRestaurantsList(props) {
   const restaurants = props.restaurants.map(fav => {
     let restaurant = fav.restaurant_id
@@ -81,8 +95,9 @@ export default function MyRestaurantsList(props) {
           <Card.Meta>{restaurant.title}</Card.Meta>
           <Card.Meta>{restaurant.address1}</Card.Meta>
           <Card.Meta>{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
-          <Card.Meta>Rating: {restaurant.rating}</Card.Meta>
+          <Card.Meta>Yelp Rating: {restaurant.rating}</Card.Meta>
           <Card.Meta>Heat Lamps: {restaurant.heat_lamps == true ? 'Yes': 'No'}</Card.Meta>
+          <Link to={`/restaurants/${restaurant.id}`}>See details</Link>
         </Card.Content>
         {
           JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
@@ -107,7 +122,7 @@ export default function MyRestaurantsList(props) {
             favorite={fav}
             removeFavorite={props.removeFavorite}
             />
-          <Button color='brown'>Review</Button>
+          <Button color='brown' onClick={() => props.reviewRestaurant(restaurant.id)}>Review</Button>
         </Card.Content>
       </Card>
     )
