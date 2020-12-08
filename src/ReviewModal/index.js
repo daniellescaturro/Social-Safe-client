@@ -15,7 +15,7 @@ export default class ReviewModal extends Component {
       favorite: '',
       rating: '',
       social_distancing_rating: '',
-      heat_lamps: '',
+      heat_lamps: false,
       comments: ''
     }
   }
@@ -29,20 +29,20 @@ export default class ReviewModal extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    this.props.createReview(this.state)
+    this.createReview(this.state)
 
     this.setState({
       favorite: '',
       rating: '',
       social_distancing_rating: '',
-      heat_lamps: '',
+      heat_lamps: false,
       comments: ''
     })
   }
 
   createReview = async (reviewToAdd) => {
       try {
-        const url = process.env.REACT_APP_API_URL + "/api/v1/reviews/"
+        const url = process.env.REACT_APP_API_URL + "/api/v1/reviews/" + this.props.idOfRestaurantToReview
         const createReviewResponse = await fetch(url, {
           method: 'POST',
           headers: {
@@ -54,24 +54,16 @@ export default class ReviewModal extends Component {
         const createReviewJson = await createReviewResponse.json()
 
         if(createReviewResponse.status === 201 || createReviewResponse.status === 200){
-          this.setState({
-            reviews: [...this.state.reviews, createReviewJson.data]
-          })
+          this.props.closeModal()
         }
 
       } catch(err) {
         console.log("Error adding review", err)
       }
-      localStorage.setItem('active', null)
-      this.props.history.push('/')
     }
 
   render() {
     return(
-      <Button icon>
-        <Icon name='heart outline' />
-      </Button>
-
       <Modal open={true} closeIcon={true} onClose={this.props.closeModal}>
 
         <Header>
@@ -85,6 +77,8 @@ export default class ReviewModal extends Component {
           <Form.Input
             type="number"
             name="rating"
+            max="5"
+            min="1"
             onChange={this.handleChange}
           />
 

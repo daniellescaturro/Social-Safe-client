@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HomeList from '../HomeList'
 import EditRestaurantModal from '../EditRestaurantModal' //added
+import ReviewModal from '../ReviewModal'
 import { Header } from 'semantic-ui-react'
 
 //original code before adds, except where noted.
@@ -12,6 +13,7 @@ export default class HomeContainer extends Component {
         restaurants: [],
         favorites: {},
         idOfRestaurantToEdit: -1, //added
+        idOfRestaurantToReview: -1,
         action: ''
       }
     }
@@ -96,7 +98,7 @@ export default class HomeContainer extends Component {
 
        if(deleteRestaurantResponse.status === 200) {
          this.setState({
-           restaurants: this.state.restaurants.filter(restaurant => restaurant.restaurant_id.id !== idOfRestaurantToDelete)
+           restaurants: this.state.restaurants.filter(restaurant => restaurant.id !== idOfRestaurantToDelete)
          })
        }
      } catch(err) {
@@ -113,6 +115,11 @@ export default class HomeContainer extends Component {
     })
   }
 
+  reviewRestaurant = (idOfRestaurantToReview) => {
+    this.setState({
+      idOfRestaurantToReview: idOfRestaurantToReview
+    })
+  }
 //ADDED - FOR SETTING UP EDIT AND DELETE FROM HOME LIST
   updateRestaurant = async (updatedRestaurantInfo) => {
     try {
@@ -156,6 +163,12 @@ export default class HomeContainer extends Component {
    })
  }
 
+  closeReviewModal = () => {
+    this.setState({
+      idOfRestaurantToReview: -1
+    })
+  }
+
 //ADDED editRestaurant, deleteRestaurant, and EditRestaurantModal, THROWS ERROR THAT editRestaurant and deleteRestaurant are undefined?
   render() {
     return (
@@ -167,7 +180,7 @@ export default class HomeContainer extends Component {
           favorites={this.state.favorites}
           editRestaurant={this.editRestaurant}
           deleteRestaurant={this.deleteRestaurant}
-          updateRestaurant={this.updateRestaurant}
+          reviewRestaurant={this.reviewRestaurant}
         />
       {
         this.state.idOfRestaurantToEdit !== -1
@@ -178,6 +191,16 @@ export default class HomeContainer extends Component {
           closeModal={this.closeModal}
         />
       }
+
+      {
+        this.state.idOfRestaurantToReview !== -1
+        &&
+        <ReviewModal
+          closeModal={this.closeReviewModal}
+          idOfRestaurantToReview={this.state.idOfRestaurantToReview}
+        />
+      }
+
       </div>
       </React.Fragment>
    )

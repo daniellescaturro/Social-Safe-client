@@ -7,6 +7,7 @@ import Navbar from './Navbar'
 import HomeContainer from './HomeContainer'
 import MyRestaurantsContainer from './MyRestaurantsContainer'
 import NewRestaurantForm from './NewRestaurantForm'
+import RestaurantDetail from './RestaurantDetail'
 
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
         <Switch>
           <Route path="/login" exact component={LoginRegisterContainer}/>
           <Protected path='/' exact component={HomeContainer}/>
+          <Protected path='/restaurants/:restaurant_id' exact component={RestaurantDetail}/>
           <Protected path='/favorites' exact component={MyRestaurantsContainer}/>
           <Protected path='/add_restaurant' exact component={NewRestaurantForm}/>
         </Switch>

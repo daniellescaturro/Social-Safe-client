@@ -1,8 +1,15 @@
 import React, { useState, useEffect, Component} from 'react'
+import { Link } from 'react-router-dom'
 import { Card, Image, Button, Icon, Grid, Header, Segment } from 'semantic-ui-react'
 import '../index.css'
 
-const RenderRestaurant = ({restaurant, favorite, editRestaurant, deleteRestaurant}) => {
+const RenderRestaurant = ({
+                          restaurant,
+                          favorite,
+                          editRestaurant,
+                          deleteRestaurant,
+                          reviewRestaurant
+                        }) => {
   let f = false
   if(favorite != undefined) {
       f = favorite.favorite
@@ -58,6 +65,14 @@ const RenderRestaurant = ({restaurant, favorite, editRestaurant, deleteRestauran
     }
 
   }
+  const  calculateAvg = (reviews) => {
+    let total = 0
+    reviews.forEach((item, i) => {
+        total += item.social_distancing_rating
+    });
+    return total / reviews.length
+
+  }
   return(
     <Card color='brown' key={restaurant.id}>
       <Image centered={true} className="restaurantImage" src={restaurant.image_url} />
@@ -69,7 +84,9 @@ const RenderRestaurant = ({restaurant, favorite, editRestaurant, deleteRestauran
         <Card.Meta>{restaurant.address1}</Card.Meta>
         <Card.Meta>{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
         <Card.Meta>Rating: {restaurant.rating}</Card.Meta>
+        <Card.Meta>Rating: {restaurant.reviews.length== 0 ? "No ratings yet" : calculateAvg(restaurant.reviews) }</Card.Meta>
         <Card.Meta>Heat Lamps: {restaurant.heat_lamps==true?'Yes':'No'}</Card.Meta>
+        <Link to={`/restaurants/${restaurant.id}`}>See details</Link>
       </Card.Content>
       {
         JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
@@ -92,7 +109,7 @@ const RenderRestaurant = ({restaurant, favorite, editRestaurant, deleteRestauran
         <Button onClick={()=> { handleClick()}} icon>
           { isFavorite ? <Icon name='heart' color='pink' /> : <Icon name='heart outline' color='pink' /> }
         </Button>
-        <Button color='brown'>Review</Button>
+        <Button color='brown' onClick={() => reviewRestaurant(restaurant.id)}>Review</Button>
       </Card.Content>
     </Card>
 
@@ -108,6 +125,7 @@ export default function HomeList(props) {
               key={restaurant.id}
               deleteRestaurant={props.deleteRestaurant}
               editRestaurant={props.editRestaurant}
+              reviewRestaurant={props.reviewRestaurant}
               />
   })
   return(
