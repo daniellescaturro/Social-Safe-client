@@ -39,6 +39,10 @@ code {
   color: ghostwhite !important
 }
 
+.buttonLink {
+  color: dimgrey !important;
+}
+
 .logo {
   margin-right: 10px !important;
   padding: 0 !important
@@ -131,6 +135,6 @@ code {
   color: ghostwhite !important;
   font-size: 15px !important;
   margin-top: 50px !important;
-  padding-top: 25px !important; 
+  padding-top: 25px !important;
   height: 75px;
 }

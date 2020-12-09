@@ -39,8 +39,8 @@ import '../index.css'
       </Menu.Item>
 			<Menu.Item className="menuItems"><Link className="navbarLink"to="/favorites">My Favorites</Link></Menu.Item>
 			<Menu.Item className="menuItems"><Link className="navbarLink" to="/add_restaurant">Add Restaurant</Link></Menu.Item>
-			<Menu.Item position='right' className="menuItems"><Button><Icon name='sign in'/><Link to="/login">Login</Link></Button></Menu.Item>
-			<Menu.Item className='menuItems'><Button><Icon name='log out'/><Link to="#" onClick={()=>logout()}>Logout</Link></Button></Menu.Item>
+			<Menu.Item position='right' className="menuItems"><Button><Icon name='sign in'/><Link className="buttonLink" to="/login">Login</Link></Button></Menu.Item>
+			<Menu.Item className='menuItems'><Button><Icon name='log out'/><Link className="buttonLink "to="#" onClick={()=>logout()}>Logout</Link></Button></Menu.Item>
 		</Menu>
 	)
 }
