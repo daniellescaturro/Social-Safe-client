@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import { Form, Modal, Button, Label, TextArea, Segment, Checkbox, Header } from 'semantic-ui-react'
 
 
-// how do i display info from another model (i.e., restaurants)? want to display:
-//restaurant Name
-//category / title
-
 export default class ReviewModal extends Component {
 
   constructor(props) {
@@ -14,25 +10,24 @@ export default class ReviewModal extends Component {
     this.state = {
       rating: '',
       social_distancing_rating: '',
-      heat_lamps: false,
       comments: ''
     }
   }
 
   handleChange = (event, data) => {
-    console.log(event.target, data)
-    if(data.type === 'checkbox'){
-
-      this.setState({
-        ['heat_lamps']: data.checked
-      })
-    }else{
+    // console.log(event.target, data)
+    // if(data.type === 'checkbox'){
+    //
+    //   this.setState({
+    //     ['heat_lamps']: data.checked
+    //   })
+    // }else{
       this.setState({
         [event.target.name]: event.target.value
       })
     }
-    console.log(event.target)
-  }
+  //   console.log(event.target)
+  // }
 
   handleSubmit = (event) => {
     event.preventDefault()
@@ -117,13 +112,6 @@ export default class ReviewModal extends Component {
             name="social_distancing_rating"
             max="5"
             min="1"
-            onChange={this.handleChange}
-          />
-
-          <Label horizontal>Heat Lamps:</Label>
-          <Form.Input
-            control={Checkbox}
-            checked={this.state.heat_lamps}
             onChange={this.handleChange}
           />
 

@@ -66,18 +66,17 @@ export default class RestaurantDetail extends Component {
   render() {
     return (
       <Container textAlign={"center"}>
-        <Image src={this.state.restaurant.image_url} />
+        <Image className="restaurantDetailImage" src={this.state.restaurant.image_url} />
         <Header as='h2'><a href={this.state.restaurant.url}>{this.state.restaurant.name}</a></Header>
         <p className="restaurantCategorySP">{this.state.restaurant.title}</p>
-        <p className="addressSP">{this.state.restaurant.address1}</p>
+        <p className="address1SP">{this.state.restaurant.address1}</p>
         <p className="addressSP">{this.state.restaurant.city}, {this.state.restaurant.state} {this.state.restaurant.zip_code}</p>
-        <p className="cardDetailSP">Yelp rating: {this.state.restaurant.rating}</p>
-        <p className="cardDetail">Social Safe Rating: {this.state.restaurant.reviews.length==0 ? "Not yet rated" : this.calculateAvgReview(this.state.restaurant.reviews) }</p>
-        <p className="cardDetail">Social Distance Rating: {this.state.restaurant.reviews.length== 0 ? "Not yet rated" : this.calculateAvgSocDistReviewAvg(this.state.restaurant.reviews) }</p>
-        <p className="cardDetailSP">Heat Lamps: {this.state.restaurant.heat_lamps==true?'Yes':'No'}</p>
+        <p className="restaurantDetailSP">Yelp Rating: {this.state.restaurant.rating}</p>
+        <p className="restaurantDetailSP">Social Safe Rating: {this.state.restaurant.reviews.length==0 ? "Not yet rated" : this.calculateAvgReview(this.state.restaurant.reviews) }</p>
+        <p className="restaurantDetailSP">Social Distance Rating: {this.state.restaurant.reviews.length== 0 ? "Not yet rated" : this.calculateAvgSocDistReview(this.state.restaurant.reviews) }</p>
 
         <React.Fragment>
-          <Header as='h4'>Reviews</Header>
+          <Header as='h3'>Reviews</Header>
         </React.Fragment>
 
         <Reviews reviews={this.state.restaurant.reviews}/>
@@ -91,8 +90,8 @@ const Reviews = ({reviews}) => {
     const reviewsList = reviews.map(review => (
     <div>
       <Card.Group>
-        <Card fluid>
-            <Card.Content>
+        <Card fluid className="reviewDetailCards">
+            <Card.Content className="reviewDetailCardContents">
               <p className="reviewListItem">Social Safe Rating: {review.rating}</p>
               <p className="reviewListItem">Social Distance Rating: {review.social_distancing_rating}</p>
               <p className="reviewListItem">Comments: {review.comments}</p>
