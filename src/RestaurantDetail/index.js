@@ -17,25 +17,18 @@ export default class RestaurantDetail extends Component {
       }
   }
 
-    //fetching by restaurant_id
+
   getRestaurant = async () => {
       try {
-        console.log("the env", process.env.REACT_APP_API_URL)
-
         const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/" + this.state.restaurant_id
-        console.log("about to fetch data from:")
-        console.log(url)
         const restaurantResponse = await fetch(url, {
         method: 'GET',
-        // mode: "no-cors",
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         }
       })
-      console.log(restaurantResponse)
       const restaurantJson = await restaurantResponse.json()
-      console.log(restaurantJson)
 
       if(restaurantResponse.status == 200 || restaurantResponse.status == 201) {
         this.setState({
@@ -47,66 +40,67 @@ export default class RestaurantDetail extends Component {
     }
   }
 
-    //component didMount
+
   componentDidMount() {
       this.getRestaurant()
   }
 
 
-  //something wrong with syntax above or with these calcs, but can't find it
   calculateAvgReview = (reviews) => {
-      let total = 0
-      reviews.forEach((item, i) => {
-          total += item.rating
-      });
-      return total / reviews.length
-    }
+    let total = 0
+    reviews.forEach((item, i) => {
+        total += item.rating
+    });
+    return total / reviews.length
+  }
 
   calculateAvgSocDistReview = (reviews) => {
-      let total = 0
-      reviews.forEach((item, i) => {
-          total += item.social_distancing_rating
-      });
-      return total / reviews.length
-    }
-
-//want to render static and nonstatic info, how to do that? do i need another component?
-
-//throws restaurant_id undefined
-    render() {
-      return (
-        <Container textAlign={"center"}>
-          <Image src={this.state.restaurant.image_url} />
-          <Header as='h2'><a href={this.state.restaurant.url}>{this.state.restaurant.name}</a></Header>
-          <p>{this.state.restaurant.title}</p>
-          <p>{this.state.restaurant.address1}</p>
-          <p>{this.state.restaurant.city}, {this.state.restaurant.state} {this.state.restaurant.zip_code}</p>
-          <p>Yelp rating: {this.state.restaurant.rating}</p>
-
-          <p>Heat Lamps: {this.state.restaurant.heat_lamps==true?'Yes':'No'}</p>
-          <Reviews reviews={this.state.restaurant.reviews}/>
-        </Container>
-      )
-    }
-
+    let total = 0
+    reviews.forEach((item, i) => {
+        total += item.social_distancing_rating
+    });
+    return total / reviews.length
   }
+
+
+  render() {
+    return (
+      <Container textAlign={"center"}>
+        <Image src={this.state.restaurant.image_url} />
+        <Header as='h2'><a href={this.state.restaurant.url}>{this.state.restaurant.name}</a></Header>
+        <p className="restaurantCategorySP">{this.state.restaurant.title}</p>
+        <p className="addressSP">{this.state.restaurant.address1}</p>
+        <p className="addressSP">{this.state.restaurant.city}, {this.state.restaurant.state} {this.state.restaurant.zip_code}</p>
+        <p className="cardDetailSP">Yelp rating: {this.state.restaurant.rating}</p>
+        <p className="cardDetail">Social Safe Rating: {this.state.restaurant.reviews.length==0 ? "Not yet rated" : this.calculateAvgReview(this.state.restaurant.reviews) }</p>
+        <p className="cardDetail">Social Distance Rating: {this.state.restaurant.reviews.length== 0 ? "Not yet rated" : this.calculateAvgSocDistReviewAvg(this.state.restaurant.reviews) }</p>
+        <p className="cardDetailSP">Heat Lamps: {this.state.restaurant.heat_lamps==true?'Yes':'No'}</p>
+
+        <React.Fragment>
+          <Header as='h4'>Reviews</Header>
+        </React.Fragment>
+
+        <Reviews reviews={this.state.restaurant.reviews}/>
+
+      </Container>
+    )
+  }
+}
 
 const Reviews = ({reviews}) => {
     const reviewsList = reviews.map(review => (
     <div>
-      <React.Fragment>
-        <Header as='h4'>Reviews</Header>
-      </React.Fragment>
       <Card.Group>
         <Card fluid>
             <Card.Content>
-              <p>Social Safe Rating: {review.rating}</p>
-              <p>Social Distance Rating: {review.social_distancing_rating}</p>
-              <p>Comments: {review.comments}</p>
+              <p className="reviewListItem">Social Safe Rating: {review.rating}</p>
+              <p className="reviewListItem">Social Distance Rating: {review.social_distancing_rating}</p>
+              <p className="reviewListItem">Comments: {review.comments}</p>
             </Card.Content>
         </Card>
       </Card.Group>
-    </div>))
+    </div>
+  ))
     return (
       <div>
         {reviewsList}
@@ -114,5 +108,3 @@ const Reviews = ({reviews}) => {
     )
 
   }
-
-//this is the nonstatic info want to render. another component?

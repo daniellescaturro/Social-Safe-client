@@ -49,20 +49,42 @@ export default class ReviewModal extends Component {
 
   createReview = async (reviewToAdd) => {
       try {
-        const url = process.env.REACT_APP_API_URL + "/api/v1/reviews/" + this.props.idOfRestaurantToReview
-        const createReviewResponse = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          credentials: 'include',
-          body: JSON.stringify(reviewToAdd)
-        })
-        const createReviewJson = await createReviewResponse.json()
+        if(this.props.restaurantToReview.id != undefined){
+          const url = process.env.REACT_APP_API_URL + "/api/v1/reviews/" + this.props.idOfRestaurantToReview
+          const createReviewResponse = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(reviewToAdd)
+          })
+          const createReviewJson = await createReviewResponse.json()
 
-        if(createReviewResponse.status === 201 || createReviewResponse.status === 200){
-          this.props.closeModal()
+          if(createReviewResponse.status === 201 || createReviewResponse.status === 200){
+            this.props.closeModal()
+          }
+        }else {
+          const url = process.env.REACT_APP_API_URL + "/api/v1/reviews/-1"
+          const data = {
+            review: reviewToAdd,
+            restaurant: this.props.restaurantToReview
+          }
+          const createReviewResponse = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(data)
+          })
+          const createReviewJson = await createReviewResponse.json()
+
+          if(createReviewResponse.status === 201 || createReviewResponse.status === 200){
+            this.props.closeModal()
+          }
         }
+
 
       } catch(err) {
         console.log("Error adding review", err)

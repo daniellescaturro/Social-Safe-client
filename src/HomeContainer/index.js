@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import HomeList from '../HomeList'
 import EditRestaurantModal from '../EditRestaurantModal' //added
 import ReviewModal from '../ReviewModal'
-import { Header } from 'semantic-ui-react'
+import { Header, Search, Grid, Label} from 'semantic-ui-react'
 
 //original code before adds, except where noted.
 export default class HomeContainer extends Component {
@@ -14,7 +14,9 @@ export default class HomeContainer extends Component {
         favorites: {},
         idOfRestaurantToEdit: -1,
         idOfRestaurantToReview: -1,
-        action: ''
+        restaurantToReview: {},
+        action: '',
+        searchResult: []
       }
     }
 
@@ -23,7 +25,11 @@ export default class HomeContainer extends Component {
         action: action
       })
     }
-
+    setSearchResults = (results) => {
+      this.setState({
+        searchResult: results
+      })
+    }
     getRestaurants = async () => {
       try {
 
@@ -113,9 +119,10 @@ export default class HomeContainer extends Component {
     })
   }
 
-  reviewRestaurant = (idOfRestaurantToReview) => {
+  reviewRestaurant = (restaurantToReview) => {
     this.setState({
-      idOfRestaurantToReview: idOfRestaurantToReview
+      idOfRestaurantToReview: restaurantToReview.id,
+      restaurantToReview: restaurantToReview
     })
   }
 
@@ -170,6 +177,14 @@ export default class HomeContainer extends Component {
   render() {
     return (
       <React.Fragment>
+        <CustomSearch setSearchResults={this.setSearchResults}/>
+        <HomeList
+          restaurants={this.state.searchResult}
+          favorites={this.state.favorites}
+          editRestaurant={this.editRestaurant}
+          deleteRestaurant={this.deleteRestaurant}
+          reviewRestaurant={this.reviewRestaurant}
+          />
         <Header as='h2' className="listHeaders">See All the Restaurants</Header>
         <div className="HomeContainer">
         <HomeList
@@ -194,6 +209,7 @@ export default class HomeContainer extends Component {
         this.state.idOfRestaurantToReview !== -1
         &&
         <ReviewModal
+          restaurantToReview={this.state.restaurantToReview}
           closeModal={this.closeReviewModal}
           idOfRestaurantToReview={this.state.idOfRestaurantToReview}
         />
@@ -203,4 +219,62 @@ export default class HomeContainer extends Component {
       </React.Fragment>
    )
   }
+}
+
+
+const CustomSearch = ({ setSearchResults }) => {
+  const  [loading, setLoading] = useState(false)
+  const [results, setResults] = useState([])
+  const [value, setValue] = useState("")
+  const timeoutRef = React.useRef()
+
+  const resultRenderer = ({ name }) => <Label content={name} />
+
+  const handleSearchChange = React.useCallback((e, data)=>{
+    clearTimeout(timeoutRef.current)
+    setValue(data.value)
+    setLoading(true)
+    console.log("data", data.value)
+    timeoutRef.current = setTimeout(async()=>{
+      // make request
+      try {
+        console.log('value', value)
+        const url = process.env.REACT_APP_API_URL + `/api/v1/restaurants/search?location=${value}`
+        const restaurantsResponse = await fetch(url, {
+          credentials: 'include',
+        })
+
+        const restaurantsJson = await restaurantsResponse.json()
+        console.log(restaurantsJson)
+        setLoading(false)
+        setResults(restaurantsJson.data)
+        setSearchResults(restaurantsJson.data)
+      } catch(err) {
+          console.log("There was an error getting the item's data. Please try again.", err)
+      }
+      console.log("I should not change as quickly as you type")
+
+    }, 2000)
+  }, [value])
+
+  React.useEffect(()=> {
+    return () => {
+      clearTimeout(timeoutRef.current)
+    }
+  }, [])
+  return(
+    <Grid>
+      <Grid.Column width={5}></Grid.Column>
+      <Grid.Column width={6}>
+        <Search
+          loading={loading}
+          results={results}
+          resultRenderer={resultRenderer}
+          onSearchChange={handleSearchChange}
+          value={value}
+        />
+      </Grid.Column>
+      <Grid.Column width={5}></Grid.Column>
+    </Grid>
+  )
 }

@@ -32,31 +32,41 @@ const RenderRestaurant = ({
           }
         })
 
-        console.log("updateResponse", updateResponse)
         const updateJson = await updateResponse.json()
-        console.log("updateJson", updateJson)
-
-        if(updateResponse.status == 200) {
-        }
       }else{
-        const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + restaurant.id
-        const updatedFavoriteInfo = { favorite: !isFavorite }
-        const updateResponse = await fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(updatedFavoriteInfo),
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
+        if(restaurant.id != undefined){
+          const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + restaurant.id
+          const updatedFavoriteInfo = { favorite: !isFavorite }
+          const updateResponse = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(updatedFavoriteInfo),
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+
+          const updateJson = await updateResponse.json()
+        }else {
+          const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/-1"
+          const updatedFavoriteInfo = { favorite: !isFavorite }
+          const data = {
+            restaurant: restaurant,
+            favorite: !isFavorite
           }
-        })
-
-        console.log("updateResponse", updateResponse)
-        const updateJson = await updateResponse.json()
-        console.log("updateJson", updateJson)
-
-        if(updateResponse.status == 200) {
-          // update favorite state
+          const updateResponse = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          const updateJson = await updateResponse.json()
         }
+
+
+
       }
       setFavorite(!isFavorite)
 
@@ -99,7 +109,7 @@ const RenderRestaurant = ({
         <Link to={`/restaurants/${restaurant.id}`}>[See Details]</Link>
       </Card.Content>
       {
-        JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
+        (restaurant.id !== undefined && JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id)
         ?
         <Card.Content extra>
           <Button
@@ -119,7 +129,7 @@ const RenderRestaurant = ({
         <Button onClick={()=> { handleClick()}} icon>
           { isFavorite ? <Icon name='heart' color='pink' /> : <Icon name='heart outline' color='pink' /> }
         </Button>
-        <Button color='brown' onClick={() => reviewRestaurant(restaurant.id)}>Review</Button>
+        <Button color='brown' onClick={() => reviewRestaurant(restaurant)}>Review</Button>
       </Card.Content>
     </Card>
 

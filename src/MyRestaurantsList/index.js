@@ -85,13 +85,6 @@ const  calculateAvgSS = (reviews) => {
   return total / reviews.length
 }
 
-// ADDED SOC DISTANCE RATING TO RETURN, THREW UNDEFINED ERROR ON RESTAURANT_ID. TRIED SEVERAL THINGS, CLD'NT GET TO WORK. (Variations tried.)
-// <p className="cardDetail">Social Distance Rating: {restaurant_id.reviews.length== 0 ? "Not yet rated" : calculateAvg(restaurant_id.reviews) }</p>
-//<Card.Meta>Social Distance Rating: {restaurant.restaurant_id.reviewRestautaurant.length== 0 ? "Not yet rated" : calculateAvg(restaurant.restaurant_id.reviews) }</Card.Meta>
-//<Card.Meta>Social Distance Rating: {fav.reviews.length== 0 ? "Not yet rated" : calculateAvg(fav.reviews) }</Card.Meta>
-
-//ONCE SOCIAL DISTANCE RATING WORKING, ALSO ADD OVERALL SS RATING
-// <p className="cardDetail">Social Safe Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvg(restaurant_id.reviews) }</p>
 
 export default function MyRestaurantsList(props) {
   console.log(props)
@@ -108,8 +101,8 @@ export default function MyRestaurantsList(props) {
           <Card.Meta>{restaurant.address1}</Card.Meta>
           <Card.Meta className="address">{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
           <p className="cardDetail">Yelp Rating: {restaurant.rating}</p>
-          <p>Social Distance Rating: {restaurant.reviews.length== 0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
-
+          <p className="cardDetail">Social Safe Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
+          <p className="cardDetail">Social Distance Rating: {restaurant.reviews.length== 0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
           <p className="cardDetail">Heat Lamps: {restaurant.heat_lamps == true ? 'Yes': 'No'}</p>
           <Link to={`/restaurants/${restaurant.id}`}>[See Details]</Link>
         </Card.Content>

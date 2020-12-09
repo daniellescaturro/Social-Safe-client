@@ -68,6 +68,21 @@ code {
   margin-bottom: 20px !important;
 }
 
+.restaurantCategorySP {
+  font-size: 15px !important;
+  color: dimgrey !important;
+}
+
+.addressSP {
+  margin-bottom: 0 !important;
+  color: dimgrey;
+}
+
+.cardDetailSP {
+  fontsize: 13px !important;
+  color: dimgrey !important;
+}
+
 .restaurantCategory {
   font-size: 15px !important;
   color: dimgrey !important;
@@ -75,6 +90,7 @@ code {
 
 .address {
   margin-bottom: 10px !important;
+  color: dimgrey;
 }
 
 .cardDetail {
