@@ -5,7 +5,6 @@ import '../index.css'
 export default class RestaurantDetail extends Component {
   constructor(props){
       super(props)
-      console.log(props.match.params.restaurant_id)
 
       this.state = {
         restaurant: {
@@ -30,7 +29,7 @@ export default class RestaurantDetail extends Component {
       })
       const restaurantJson = await restaurantResponse.json()
 
-      if(restaurantResponse.status == 200 || restaurantResponse.status == 201) {
+      if(restaurantResponse.status === 200 || restaurantResponse.status === 201) {
         this.setState({
        restaurant: restaurantJson.data
       })
@@ -72,8 +71,8 @@ export default class RestaurantDetail extends Component {
         <p className="address1SP">{this.state.restaurant.address1}</p>
         <p className="addressSP">{this.state.restaurant.city}, {this.state.restaurant.state} {this.state.restaurant.zip_code}</p>
         <p className="restaurantDetailSP">Yelp Rating: {this.state.restaurant.rating}</p>
-        <p className="restaurantDetailSP">Social Safe Rating: {this.state.restaurant.reviews.length==0 ? "Not yet rated" : this.calculateAvgReview(this.state.restaurant.reviews) }</p>
-        <p className="restaurantDetailSP">Social Distance Rating: {this.state.restaurant.reviews.length== 0 ? "Not yet rated" : this.calculateAvgSocDistReview(this.state.restaurant.reviews) }</p>
+        <p className="restaurantDetailSP">Social Safe Rating: {this.state.restaurant.reviews.length===0 ? "Not yet rated" : this.calculateAvgReview(this.state.restaurant.reviews) }</p>
+        <p className="restaurantDetailSP">Social Distance Rating: {this.state.restaurant.reviews.length===0 ? "Not yet rated" : this.calculateAvgSocDistReview(this.state.restaurant.reviews) }</p>
 
         <React.Fragment>
           <Header as='h3'>Reviews</Header>
@@ -105,5 +104,4 @@ const Reviews = ({reviews}) => {
         {reviewsList}
       </div>
     )
-
   }

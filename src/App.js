@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import { BrowserRouter, Route, Switch, Redirect, Link} from 'react-router-dom';
-import Footer from './Footer'
-
+import React from 'react'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import LoginRegisterContainer from './LoginRegisterContainer'
 import Navbar from './Navbar'
+import Footer from './Footer'
 import HomeContainer from './HomeContainer'
 import MyRestaurantsContainer from './MyRestaurantsContainer'
 import NewRestaurantForm from './NewRestaurantForm'

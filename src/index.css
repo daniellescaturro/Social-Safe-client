@@ -29,11 +29,14 @@ code {
 
 .navbar {
   background-color: #74BCCC  !important;
-  color: ghostwhite !important;
   vertical-align: center !important;
   margin-bottom: 45px !important;
-  font-size: 15px !important;
+  font-size: 16px !important;
   height: 75px;
+}
+
+.navbarLink {
+  color: ghostwhite !important
 }
 
 .logo {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import LoginRegisterForm from '../LoginRegisterForm'
 import HomeContainer from '../HomeContainer'
-import '../App.css'
+
 
 export default class LoginRegisterContainer extends Component {
   constructor(props) {
@@ -20,7 +20,6 @@ export default class LoginRegisterContainer extends Component {
   }
 
 register = async (registerInfo) => {
-  console.log("register called with the following info", registerInfo);
   const url = process.env.REACT_APP_API_URL + "/api/v1/users/register"
 
   try {
@@ -32,9 +31,8 @@ register = async (registerInfo) => {
         'Content-Type': 'application/json'
       }
     })
-    console.log("registerResponse", registerResponse);
+
     const registerJson = await registerResponse.json()
-    console.log("registerJson", registerJson);
 
     if(registerResponse.status === 201) {
      this.setState({
@@ -52,7 +50,6 @@ register = async (registerInfo) => {
 }
 
 login = async (loginInfo) => {
-  console.log("login called with the following info", loginInfo);
   const url = process.env.REACT_APP_API_URL + '/api/v1/users/login'
 
   try {
@@ -64,9 +61,8 @@ login = async (loginInfo) => {
         'Content-Type': 'application/json'
       }
     })
-    console.log("loginResponse", loginResponse);
+
     const loginJson = await loginResponse.json()
-    console.log("loginJson", loginJson);
 
     if(loginResponse.status === 200) {
         this.setState({
@@ -86,7 +82,6 @@ login = async (loginInfo) => {
 
   render() {
     return (
-      <div>
       <div className="LoginRegisterContainer">
         {
           this.state.loggedIn
@@ -100,8 +95,7 @@ login = async (loginInfo) => {
             register={this.register}
           />
         }
-      </div>
-      </div>
+    </div>
     )
   }
 }

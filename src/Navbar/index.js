@@ -2,13 +2,10 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import { Menu, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import NewRestaurantForm from '../NewRestaurantForm'
 import '../index.css'
-import '../App.css'
 
 
  function Navbar(props) {
-
 	const logout = async () => {
 	  try {
 	    const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
@@ -20,9 +17,7 @@ import '../App.css'
 				},
 				credentials: 'include'
 	    })
-	    console.log("logoutResponse", logoutResponse);
 	    const logoutJson = await logoutResponse.json()
-	    console.log("logoutJson", logoutJson);
 
 	    if(logoutResponse.status === 200) {
 	      localStorage.setItem('active', null);
@@ -40,10 +35,10 @@ import '../App.css'
 		<Menu secondary pointing className="navbar">
 			<Menu.Item className='companyName'>
         <Icon name='food' color='grey' className="logo"></Icon>
-        <Link to='/'>Social Safe</Link>
+        <Link className="navbarLink" to='/'>Social Safe</Link>
       </Menu.Item>
-			<Menu.Item className="menuItems"><Link to="/favorites">My Favorites</Link></Menu.Item>
-			<Menu.Item className="menuItems"><Link to="/add_restaurant">Add Restaurant</Link></Menu.Item>
+			<Menu.Item className="menuItems"><Link className="navbarLink"to="/favorites">My Favorites</Link></Menu.Item>
+			<Menu.Item className="menuItems"><Link className="navbarLink" to="/add_restaurant">Add Restaurant</Link></Menu.Item>
 			<Menu.Item position='right' className="menuItems"><Button><Icon name='sign in'/><Link to="/login">Login</Link></Button></Menu.Item>
 			<Menu.Item className='menuItems'><Button><Icon name='log out'/><Link to="#" onClick={()=>logout()}>Logout</Link></Button></Menu.Item>
 		</Menu>

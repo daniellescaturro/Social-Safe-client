@@ -6,7 +6,7 @@ import '../index.css'
 
 const Fav = ({restaurant, favorite, removeFavorite}) => {
   let f = false
-  if(favorite != undefined) {
+  if(favorite !== undefined) {
       f = favorite.favorite
 
   }
@@ -15,7 +15,7 @@ const Fav = ({restaurant, favorite, removeFavorite}) => {
   const handleClick = async () => {
 
     try {
-      if(favorite != undefined){
+      if(favorite !== undefined){
         const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + favorite.id
         const updatedFavoriteInfo = {favorite: !isFavorite}
         const updateResponse = await fetch(url, {
@@ -31,7 +31,7 @@ const Fav = ({restaurant, favorite, removeFavorite}) => {
         const updateJson = await updateResponse.json()
         console.log("updateJson", updateJson)
 
-        if(updateResponse.status == 200) {
+        if(updateResponse.status === 200) {
         }
       }else{
         const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + restaurant.id
@@ -45,12 +45,9 @@ const Fav = ({restaurant, favorite, removeFavorite}) => {
           }
         })
 
-        console.log("updateResponse", updateResponse)
         const updateJson = await updateResponse.json()
-        console.log("updateJson", updateJson)
 
-        if(updateResponse.status == 200) {
-          // update favorite state
+        if(updateResponse.status === 200) {
         }
       }
       setFavorite(!isFavorite)
@@ -59,13 +56,12 @@ const Fav = ({restaurant, favorite, removeFavorite}) => {
     } catch(err) {
       console.log("Error updating  info: ", err)
     }
-
   }
-  return(
 
-        <Button onClick={()=> { handleClick()}} icon>
-          { isFavorite ? <Icon name='heart' color='pink' /> : <Icon name='heart outline' color='pink' /> }
-        </Button>
+  return(
+    <Button onClick={()=> { handleClick()}} icon>
+      { isFavorite ? <Icon name='heart' color='pink' /> : <Icon name='heart outline' color='pink' /> }
+    </Button>
   )
 }
 
@@ -87,7 +83,6 @@ const  calculateAvgSS = (reviews) => {
 
 
 export default function MyRestaurantsList(props) {
-  console.log(props)
   const restaurants = props.restaurants.map(fav => {
     let restaurant = fav.restaurant_id
     return (
@@ -101,13 +96,13 @@ export default function MyRestaurantsList(props) {
           <Card.Meta>{restaurant.address1}</Card.Meta>
           <Card.Meta className="address">{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
           <p className="cardDetail">Yelp Rating: {restaurant.rating}</p>
-          <p className="cardDetail">Social Safe Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
-          <p className="cardDetail">Social Distance Rating: {restaurant.reviews.length== 0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
-          <p className="cardDetail">Heat Lamps: {restaurant.heat_lamps == true ? 'Yes': 'No'}</p>
+          <p className="cardDetail">Social Safe Rating: {restaurant.reviews.length===0 ? "Not yet rated" : calculateAvgSS(restaurant.reviews) }</p>
+          <p className="cardDetail">Social Distance Rating: {restaurant.reviews.length===0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
+          <p className="cardDetail">Heat Lamps: {restaurant.heat_lamps === true ? 'Yes': 'No'}</p>
           <Link to={`/restaurants/${restaurant.id}`}>[See Details]</Link>
         </Card.Content>
         {
-          JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id
+          JSON.parse(localStorage.getItem('userData')).id === restaurant.uploader.id
           ?
           <Card.Content extra>
             <Button
@@ -129,7 +124,7 @@ export default function MyRestaurantsList(props) {
             favorite={fav}
             removeFavorite={props.removeFavorite}
             />
-          <Button color='brown' onClick={() => props.reviewRestaurant(restaurant.id)}>Review</Button>
+          <Button color='brown' onClick={() => props.reviewRestaurant(restaurant)}>Review</Button>
         </Card.Content>
       </Card>
     )

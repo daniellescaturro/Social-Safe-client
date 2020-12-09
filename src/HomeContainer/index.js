@@ -25,31 +25,27 @@ export default class HomeContainer extends Component {
         action: action
       })
     }
+
     setSearchResults = (results) => {
       this.setState({
         searchResult: results
       })
     }
+
     getRestaurants = async () => {
       try {
-
-        console.log("the env", process.env.REACT_APP_API_URL)
         const url = process.env.REACT_APP_API_URL + "/api/v1/restaurants/"
-        console.log("about to fetch data from:")
-        console.log(url)
         const restaurantsResponse = await fetch(url, {
         method: 'GET',
-        // mode: "no-cors",
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         }
       })
-      console.log(restaurantsResponse)
-      const restaurantsJson = await restaurantsResponse.json()
-      console.log(restaurantsJson)
 
-      if(restaurantsResponse.status == 200 || restaurantsResponse.status == 201 ) {
+      const restaurantsJson = await restaurantsResponse.json()
+
+      if(restaurantsResponse.status === 200 || restaurantsResponse.status === 201 ) {
         this.setState({
        restaurants: restaurantsJson.data
       })
@@ -62,7 +58,6 @@ export default class HomeContainer extends Component {
         let url = process.env.REACT_APP_API_URL + "/api/v1/favorites/myfavorites"
         let res = await fetch(url, {
           method: 'GET',
-          // mode: "no-cors",
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
@@ -71,7 +66,6 @@ export default class HomeContainer extends Component {
         let resJson = await res.json()
         let favs = {}
         resJson.data.forEach((item, i) => {
-          console.log("item",item)
           favs[item['restaurant_id']['id']] = item;
         });
         this.setState({favorites: favs})
@@ -98,8 +92,7 @@ export default class HomeContainer extends Component {
        })
 
        const deleteRestaurantJson = await deleteRestaurantResponse.json()
-       console.log("deleteRestaurantJson", deleteRestaurantJson)
-
+       
        if(deleteRestaurantResponse.status === 200) {
          this.setState({
            restaurants: this.state.restaurants.filter(restaurant => restaurant.id !== idOfRestaurantToDelete)
@@ -112,8 +105,6 @@ export default class HomeContainer extends Component {
 
 
   editRestaurant = (idOfRestaurantToEdit) => {
-    console.log("you are trying to edit restaurant with id: ", idOfRestaurantToEdit)
-
     this.setState({
       idOfRestaurantToEdit: idOfRestaurantToEdit
     })
@@ -133,21 +124,17 @@ export default class HomeContainer extends Component {
       const updateRestaurantResponse = await fetch(url, {
         method: 'PUT',
         body: JSON.stringify(updatedRestaurantInfo),
-        //mode: 'no-cors',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
-
         }
       })
 
-      console.log("updateRestaurantResponse", updateRestaurantResponse)
       const updateRestaurantJson = await updateRestaurantResponse.json()
-      console.log("updateRestaurantJson", updateRestaurantJson)
 
-      if(updateRestaurantResponse.status == 200) {
+      if(updateRestaurantResponse.status === 200) {
         const restaurants = this.state.restaurants
-        const indexOfRestaurantBeingUpdated = restaurants.findIndex(restaurant => restaurant.id == this.state.idOfRestaurantToEdit)
+        const indexOfRestaurantBeingUpdated = restaurants.findIndex(restaurant => restaurant.id === this.state.idOfRestaurantToEdit)
         restaurants[indexOfRestaurantBeingUpdated] =  updateRestaurantJson.data
         this.setState({
           restaurants: restaurants,
@@ -234,26 +221,21 @@ const CustomSearch = ({ setSearchResults }) => {
     clearTimeout(timeoutRef.current)
     setValue(data.value)
     setLoading(true)
-    console.log("data", data.value)
     timeoutRef.current = setTimeout(async()=>{
-      // make request
+
       try {
-        console.log('value', value)
         const url = process.env.REACT_APP_API_URL + `/api/v1/restaurants/search?location=${value}`
         const restaurantsResponse = await fetch(url, {
           credentials: 'include',
         })
 
         const restaurantsJson = await restaurantsResponse.json()
-        console.log(restaurantsJson)
         setLoading(false)
         setResults(restaurantsJson.data)
         setSearchResults(restaurantsJson.data)
       } catch(err) {
           console.log("There was an error getting the item's data. Please try again.", err)
       }
-      console.log("I should not change as quickly as you type")
-
     }, 2000)
   }, [value])
 
@@ -262,6 +244,7 @@ const CustomSearch = ({ setSearchResults }) => {
       clearTimeout(timeoutRef.current)
     }
   }, [])
+
   return(
     <Grid>
       <Grid.Column width={5}></Grid.Column>

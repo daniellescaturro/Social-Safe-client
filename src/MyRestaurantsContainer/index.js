@@ -13,8 +13,15 @@ export default class MyRestaurantsContainer extends Component {
       restaurants: [],
       idOfRestaurantToEdit: -1,
       idOfRestaurantToReview: -1,
-      action: ''
+      restaurantToReview: {},
+      action: '',
     }
+  }
+
+  setActionState = (action) => {
+    this.setState({
+      action: action
+    })
   }
 
   componentDidMount() {
@@ -38,9 +45,11 @@ export default class MyRestaurantsContainer extends Component {
       const restaurantsJson = await restaurantsResponse.json()
       console.log(restaurantsJson)
 
+    if(restaurantsResponse.status === 200 || restaurantsResponse.status === 201 ) {
       this.setState({
         restaurants: restaurantsJson.data
       })
+    }
     } catch(err) {
         console.log("There was an error getting the item's data. Please try again.", err)
     }
@@ -57,7 +66,6 @@ export default class MyRestaurantsContainer extends Component {
        })
 
        const deleteRestaurantJson = await deleteRestaurantResponse.json()
-       console.log("deleteRestaurantJson", deleteRestaurantJson)
 
        if(deleteRestaurantResponse.status === 200) {
          this.setState({
@@ -71,16 +79,16 @@ export default class MyRestaurantsContainer extends Component {
 
 
   editRestaurant = (idOfRestaurantToEdit) => {
-    console.log("you are trying to edit restaurant with id: ", idOfRestaurantToEdit)
 
     this.setState({
       idOfRestaurantToEdit: idOfRestaurantToEdit
     })
   }
 
-  reviewRestaurant = (idOfRestaurantToReview) => {
+  reviewRestaurant = (restaurantToReview) => {
     this.setState({
-      idOfRestaurantToReview: idOfRestaurantToReview
+      idOfRestaurantToReview: restaurantToReview.id,
+      restaurantToReview: restaurantToReview
     })
   }
 
@@ -92,21 +100,17 @@ export default class MyRestaurantsContainer extends Component {
       const updateRestaurantResponse = await fetch(url, {
         method: 'PUT',
         body: JSON.stringify(updatedRestaurantInfo),
-        //mode: 'no-cors',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
-
         }
       })
 
-      console.log("updateRestaurantResponse", updateRestaurantResponse)
       const updateRestaurantJson = await updateRestaurantResponse.json()
-      console.log("updateRestaurantJson", updateRestaurantJson)
 
-      if(updateRestaurantResponse.status == 200) {
+      if(updateRestaurantResponse.status === 200) {
         const restaurants = this.state.restaurants
-        const indexOfRestaurantBeingUpdated = restaurants.findIndex(restaurant => restaurant.id == this.state.idOfRestaurantToEdit)
+        const indexOfRestaurantBeingUpdated = restaurants.findIndex(restaurant => restaurant.id === this.state.idOfRestaurantToEdit)
         restaurants[indexOfRestaurantBeingUpdated].restaurant_id =  updateRestaurantJson.data
         this.setState({
           restaurants: restaurants,
@@ -159,6 +163,7 @@ export default class MyRestaurantsContainer extends Component {
         this.state.idOfRestaurantToReview !== -1
         &&
         <ReviewModal
+          restaurantToReview={this.state.restaurantToReview}
           closeModal={this.closeReviewModal}
           idOfRestaurantToReview={this.state.idOfRestaurantToReview}
         />
@@ -168,6 +173,5 @@ export default class MyRestaurantsContainer extends Component {
       </React.Fragment>
     )
   }
-
 
 }

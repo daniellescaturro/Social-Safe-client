@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Component} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Image, Button, Icon, Grid, Header, Segment } from 'semantic-ui-react'
+import { Card, Image, Button, Icon } from 'semantic-ui-react'
 import '../index.css'
 
 const RenderRestaurant = ({
@@ -11,7 +11,7 @@ const RenderRestaurant = ({
                           reviewRestaurant
                         }) => {
   let f = false
-  if(favorite != undefined) {
+  if(favorite !== undefined) {
       f = favorite.favorite
 
   }
@@ -20,7 +20,7 @@ const RenderRestaurant = ({
   const handleClick = async () => {
 
     try {
-      if(favorite != undefined){
+      if(favorite !== undefined){
         const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + favorite.id
         const updatedFavoriteInfo = {favorite: !isFavorite}
         const updateResponse = await fetch(url, {
@@ -34,7 +34,7 @@ const RenderRestaurant = ({
 
         const updateJson = await updateResponse.json()
       }else{
-        if(restaurant.id != undefined){
+        if(restaurant.id !== undefined){
           const url = process.env.REACT_APP_API_URL + "/api/v1/favorites/" + restaurant.id
           const updatedFavoriteInfo = { favorite: !isFavorite }
           const updateResponse = await fetch(url, {
@@ -64,24 +64,19 @@ const RenderRestaurant = ({
           })
           const updateJson = await updateResponse.json()
         }
-
-
-
       }
       setFavorite(!isFavorite)
-
     } catch(err) {
       console.log("Error updating  info: ", err)
     }
-
   }
+
   const  calculateAvg = (reviews) => {
     let total = 0
     reviews.forEach((item, i) => {
         total += item.social_distancing_rating
     });
     return total / reviews.length
-
   }
 
   const  calculateAvgSS = (reviews) => {
@@ -103,13 +98,20 @@ const RenderRestaurant = ({
         <Card.Meta>{restaurant.address1}</Card.Meta>
         <Card.Meta className="address">{restaurant.city}, {restaurant.state} {restaurant.zip_code}</Card.Meta>
         <p className="cardDetail"> Yelp Rating: {restaurant.rating}</p>
-        <p className="cardDetail">Social Safe Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvgSS(restaurant.reviews) }</p>
-        <p className="cardDetail">Social Distance Rating: {restaurant.reviews.length==0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
-        <p className="cardDetail">Heat Lamps: {restaurant.heat_lamps==true?'Yes':'No'}</p>
-        <Link to={`/restaurants/${restaurant.id}`}>[See Details]</Link>
+        <p className="cardDetail">Social Safe Rating: {restaurant.reviews.length===0 ? "Not yet rated" : calculateAvgSS(restaurant.reviews) }</p>
+        <p className="cardDetail">Social Distance Rating: {restaurant.reviews.length===0 ? "Not yet rated" : calculateAvg(restaurant.reviews) }</p>
+        <p className="cardDetail">Heat Lamps: {restaurant.heat_lamps===true?'Yes':'No'}</p>
+        {
+          (restaurant.id !== undefined)
+          ?
+          <Link to={`/restaurants/${restaurant.id}`}>[See Details]</Link>
+          :
+          ''
+        }
       </Card.Content>
+
       {
-        (restaurant.id !== undefined && JSON.parse(localStorage.getItem('userData')).id == restaurant.uploader.id)
+        (restaurant.id !== undefined && JSON.parse(localStorage.getItem('userData')).id === restaurant.uploader.id)
         ?
         <Card.Content extra>
           <Button
@@ -125,6 +127,7 @@ const RenderRestaurant = ({
         :
         ''
       }
+
       <Card.Content extra>
         <Button onClick={()=> { handleClick()}} icon>
           { isFavorite ? <Icon name='heart' color='pink' /> : <Icon name='heart outline' color='pink' /> }
@@ -132,12 +135,10 @@ const RenderRestaurant = ({
         <Button color='brown' onClick={() => reviewRestaurant(restaurant)}>Review</Button>
       </Card.Content>
     </Card>
-
   )
 }
 
 export default function HomeList(props) {
-
   const restaurantsToDisplay = props.restaurants.map(restaurant => {
     return <RenderRestaurant
               restaurant={restaurant}
@@ -146,8 +147,9 @@ export default function HomeList(props) {
               deleteRestaurant={props.deleteRestaurant}
               editRestaurant={props.editRestaurant}
               reviewRestaurant={props.reviewRestaurant}
-              />
+          />
   })
+
   return(
     <Card.Group centered={true}>
       {restaurantsToDisplay}

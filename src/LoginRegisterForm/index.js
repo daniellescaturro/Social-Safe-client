@@ -4,7 +4,6 @@ import '../index.css'
 
 
 export default class LoginRegisterForm extends Component {
-
   constructor() {
     super()
 
@@ -31,9 +30,7 @@ handleChange = (event) => {
 }
 
 handleSubmit = (event) => {
-   event.preventDefault()
-   console.log(`You are trying to ${this.state.action.toLowerCase()} with the following credentials`)
-   console.log(this.state);
+ event.preventDefault()
 
    if(this.state.action === "Register") {
       this.props.register(this.state)

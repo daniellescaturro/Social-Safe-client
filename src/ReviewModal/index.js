@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Modal, Button, Label, TextArea, Segment, Checkbox, Header } from 'semantic-ui-react'
+import { Form, Modal, Button, Label, TextArea, Checkbox, Header } from 'semantic-ui-react'
 
 
 export default class ReviewModal extends Component {
@@ -15,19 +15,12 @@ export default class ReviewModal extends Component {
   }
 
   handleChange = (event, data) => {
-    // console.log(event.target, data)
-    // if(data.type === 'checkbox'){
-    //
-    //   this.setState({
-    //     ['heat_lamps']: data.checked
-    //   })
-    // }else{
+          
       this.setState({
         [event.target.name]: event.target.value
       })
     }
-  //   console.log(event.target)
-  // }
+
 
   handleSubmit = (event) => {
     event.preventDefault()
@@ -37,14 +30,13 @@ export default class ReviewModal extends Component {
     this.setState({
       rating: '',
       social_distancing_rating: '',
-      heat_lamps: false,
       comments: ''
     })
   }
 
   createReview = async (reviewToAdd) => {
       try {
-        if(this.props.restaurantToReview.id != undefined){
+        if(this.props.restaurantToReview.id !== undefined){
           const url = process.env.REACT_APP_API_URL + "/api/v1/reviews/" + this.props.idOfRestaurantToReview
           const createReviewResponse = await fetch(url, {
             method: 'POST',

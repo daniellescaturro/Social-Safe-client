@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Label, Segment, Checkbox, Header } from 'semantic-ui-react'
 import '../index.css'
-import '../App.css'
+
 
 export default class NewRestaurantForm extends Component {
 
@@ -23,7 +23,6 @@ export default class NewRestaurantForm extends Component {
   }
 
   handleChange = (event, data) => {
-    console.log(event.target, data)
     if(data.type === 'checkbox'){
 
       this.setState({
@@ -34,7 +33,6 @@ export default class NewRestaurantForm extends Component {
         [event.target.name]: event.target.value
       })
     }
-    console.log(event.target)
   }
 
   handleSubmit = (event) => {
