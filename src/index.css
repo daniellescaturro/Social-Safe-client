@@ -126,10 +126,11 @@ code {
   color: dimgrey !important;
 }
 
-
 .footer {
   background-color: #0F7880 !important;
   color: ghostwhite !important;
   font-size: 15px !important;
   margin-top: 50px !important;
+  padding-top: 25px !important; 
+  height: 75px;
 }
