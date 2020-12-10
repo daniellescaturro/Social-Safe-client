@@ -4,7 +4,7 @@ import EditRestaurantModal from '../EditRestaurantModal' //added
 import ReviewModal from '../ReviewModal'
 import { Header, Search, Grid, Label} from 'semantic-ui-react'
 
-//original code before adds, except where noted.
+
 export default class HomeContainer extends Component {
   constructor(props) {
     super(props)
@@ -92,7 +92,7 @@ export default class HomeContainer extends Component {
        })
 
        const deleteRestaurantJson = await deleteRestaurantResponse.json()
-       
+
        if(deleteRestaurantResponse.status === 200) {
          this.setState({
            restaurants: this.state.restaurants.filter(restaurant => restaurant.id !== idOfRestaurantToDelete)
