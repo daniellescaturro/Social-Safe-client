@@ -15,5 +15,6 @@ The target user group is urban adults who like to go out to restaurants, cafes, 
   * If the user is new to the app, he/she/they will need to register through the Sign Up link below the Login in form. And, after that, he/she/they will need to Log In upon each use. 
   * Once the user is logged in, they will be brought to the homepage.
   
-  ![alt text](https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png)
-
+ <p align="center">
+   ![alt text](https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png)
+ </p>
