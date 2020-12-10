@@ -9,6 +9,7 @@ export default class NewRestaurantForm extends Component {
     super(props)
 
     this.state = {
+      restaurants: [],
       name: '',
       image_url: '',
       url: '',
