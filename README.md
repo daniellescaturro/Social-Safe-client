@@ -16,5 +16,5 @@ The target user group is urban adults who like to go out to restaurants, cafes, 
   * Once the user is logged in, they will be brought to the homepage.
   
  <p align="center">
-   ![alt text](https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png)
+   <img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png">
  </p>
