@@ -50,7 +50,7 @@ export default class RestaurantDetail extends Component {
     reviews.forEach((item, i) => {
         total += item.rating
     });
-    return total / reviews.length
+    return Math.round((total / reviews.length) * 10) /10
   }
 
   calculateAvgSocDistReview = (reviews) => {
@@ -58,7 +58,7 @@ export default class RestaurantDetail extends Component {
     reviews.forEach((item, i) => {
         total += item.social_distancing_rating
     });
-    return total / reviews.length
+    return Math.round((total / reviews.length) * 10) / 10
   }
 
 
