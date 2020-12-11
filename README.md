@@ -16,7 +16,7 @@ The target user group is urban adults who like to go out to restaurants, cafes, 
   * Once the user is logged in, they will be brought to the homepage.
 
 <p align="center>
-	<img align="center" src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png">
+	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png">
 </p>														  
 														  
 
@@ -33,7 +33,7 @@ In the image above you can also see the Edit and Delete buttons. Users have the 
 Additionally, you can see the Review button on the bottom right side of the Restaurant card. Multiple users can review a restaurant. It includes a general rating, a social distance rating, and space for comments. Reviews can be viewed on the Restaurant Detail page seen below and accessed through the [See details] link on the Restaurant Card.  
 
 <p align=“center”>
-	<img src=“https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_top.png">
+	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_top.png">
 	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_botton.png">										      
 </p>
 							 
