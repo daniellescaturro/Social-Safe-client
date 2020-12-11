@@ -24,18 +24,18 @@ The target user group is urban adults who like to go out to restaurants, cafes, 
  * This view is a listing of all the restaurants in the database via a Restaurant cards view. In addition to the items and ratings discussed in the introduction, cards also note the restaurant category (e.g., pizza). The restaurant name is a link that will bring the user to either the restaurant's website or the Yelp review page. There is also a link [See Details] that takes the user to a more detailed view of the restaurant. 
  * Users have the ability to mark their “favorite” restaurants by clicking the heart in the bottom left corner of the Restaurant card. Once marked as a favorite, the heart color fills in and the Restaurant will be displayed on the My Favorites page as seen below. The My Favorites view is identical to the homepage view.
 
- <div align=“center”>
+ <p align="center">
 	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_myfav.png">
-</div>
+</p>
 
 When the favorite button is clicked again, the heart returns to an outline display and the record is removed from the My Favorites view. It can still be viewed on the homepage. 
 In the image above you can also see the Edit and Delete buttons. Users have the ability to edit and delete records they add to the database.
 Additionally, you can see the Review button on the bottom right side of the Restaurant card. Multiple users can review a restaurant. It includes a general rating, a social distance rating, and space for comments. Reviews can be viewed on the Restaurant Detail page seen below and accessed through the [See details] link on the Restaurant Card.  
 
-<p align=“center”>
+<p align="center">
 	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_top.png">
 </p>
-<p align=“center”>
+<p align="center">
 	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_botton.png">				</p>
 					  
  * Additionally, on the homepage users can conduct a live search of the Yelp API using location parameters. Records that are interacted with by clicking either the “favorite” or “review” buttons will be added to the database. Duplicates will not be entered into the database.  
