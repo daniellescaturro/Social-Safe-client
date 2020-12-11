@@ -15,7 +15,10 @@ The target user group is urban adults who like to go out to restaurants, cafes, 
   * If the user is new to the app, he/she/they will need to register through the Sign Up link below the Login in form. And, after that, he/she/they will need to Log In upon each use. 
   * Once the user is logged in, they will be brought to the homepage.
 
-<img align="center" src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png">
+<div align="center>
+ <img align="center" src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png">
+</div>														  
+														  
 
  * As you can see in the image above, there is basic navigation in the header for accessing the homepage through the Social Safe link and links to access My Favorites, Add New Restaurant and to Login and Logout.
  * This view is a listing of all the restaurants in the database via a Restaurant cards view. In addition to the items and ratings discussed in the introduction, cards also note the restaurant category (e.g., pizza). The restaurant name is a link that will bring the user to either the restaurant's website or the Yelp review page. There is also a link [See Details] that takes the user to a more detailed view of the restaurant. 
