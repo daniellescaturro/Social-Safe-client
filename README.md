@@ -15,9 +15,9 @@ The target user group is urban adults who like to go out to restaurants, cafes, 
   * If the user is new to the app, he/she/they will need to register through the Sign Up link below the Login in form. And, after that, he/she/they will need to Log In upon each use. 
   * Once the user is logged in, they will be brought to the homepage.
 
-<div align="center>
+<p align="center>
 	<img align="center" src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png">
-</div>														  
+</p>														  
 														  
 
  * As you can see in the image above, there is basic navigation in the header for accessing the homepage through the Social Safe link and links to access My Favorites, Add New Restaurant and to Login and Logout.
@@ -32,10 +32,10 @@ When the favorite button is clicked again, the heart returns to an outline displ
 In the image above you can also see the Edit and Delete buttons. Users have the ability to edit and delete records they add to the database.
 Additionally, you can see the Review button on the bottom right side of the Restaurant card. Multiple users can review a restaurant. It includes a general rating, a social distance rating, and space for comments. Reviews can be viewed on the Restaurant Detail page seen below and accessed through the [See details] link on the Restaurant Card.  
 
-<div align=“center”>
+<p align=“center”>
 	<img src=“https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_top.png">
-											      
-</div>
+	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_botton.png">										      
+</p>
 							 
  
  * Additionally, on the homepage users can conduct a live search of the Yelp API using location parameters. Records that are interacted with by clicking either the “favorite” or “review” buttons will be added to the database. Duplicates will not be entered into the database.  
