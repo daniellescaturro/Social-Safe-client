@@ -33,8 +33,10 @@ Additionally, you can see the Review button on the bottom right side of the Rest
 
 <p align=“center”>
 	<img src=“https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_top.png">
-	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_botton.png">
 </p>
+<p align=“center”>
+  	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_botton.png">
+</p>														 
  
  * Additionally, on the homepage users can conduct a live search of the Yelp API using location parameters. Records that are interacted with by clicking either the “favorite” or “review” buttons will be added to the database. Duplicates will not be entered into the database.  
 
