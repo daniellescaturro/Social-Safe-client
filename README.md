@@ -6,7 +6,7 @@ In preparation for this capstone project as part of my participation in General 
 
 ## Planning
   * Wireframes: https://github.com/daniellescaturro/socialsafe-backend/blob/main/Social-Safe-Wireframes.pdf
-  * Diagram of React folder structure: https://github.com/daniellescaturro/socialsafe-client/blob/main/React_Folder_Structure.jpg
+  * Diagram of React folder structure: https://github.com/daniellescaturro/socialsafe-client/blob/main/React_Folder_Structure.png
 
 ##  User Story
 The target user group is urban adults who like to go out to restaurants, cafes, pubs, and other venues to socialize with friends and family. However, the app can really be used by anyone who has an interest in socializing at the venues described and is concerned about social distancing.
