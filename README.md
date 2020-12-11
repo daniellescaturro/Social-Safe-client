@@ -15,7 +15,7 @@ The target user group is urban adults who like to go out to restaurants, cafes, 
   * If the user is new to the app, he/she/they will need to register through the Sign Up link below the Login in form. And, after that, he/she/they will need to Log In upon each use. 
   * Once the user is logged in, they will be brought to the homepage.
 
-<p align="center>
+<p align="center">
 	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_homepage.png">
 </p>														  
 														  
@@ -34,10 +34,10 @@ Additionally, you can see the Review button on the bottom right side of the Rest
 
 <p align=“center”>
 	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_top.png">
-	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_botton.png">										      
 </p>
-							 
- 
+<p align=“center”>
+	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_botton.png">				</p>
+					  
  * Additionally, on the homepage users can conduct a live search of the Yelp API using location parameters. Records that are interacted with by clicking either the “favorite” or “review” buttons will be added to the database. Duplicates will not be entered into the database.  
 
 ## Technical Specifications
