@@ -44,7 +44,7 @@ Additionally, you can see the Review button on the bottom right side of the Rest
 This game was created using Flask/Python, React, Semantic UI React and CSS. It is deployed on Heroku and requires no installation. 
 
 ## Forthcoming Features
- * In a future version of the application I plan to expand the search functionality beyond location parameter to include items such as cuisine, venue type, etc.
+ * In a future version of the application I plan to expand the search functionality beyond location parameter to include items such as cuisine, venue type, etc. And it needs improved functionality for adding restaurants from search than refreshing the screen.  The dropdown either needs to be removed or the results should be made clickable. 
  * I also plan to improve the user experience by consolidating and simplifying data entry where possible. For example, a user currently adds presence of head lamps on the Add New Restaurant or Edit Restaurant form but is unable to do so when reviewing a restaurant. I'd also like to add drop down lists for easier data entry. 
  * I would also like to better organize the list by sorting it alphabetically or giving the user the option on how to sort. 
  * Better presentation of information is also a goal. I’d like to use clickable “stars” for ratings and to reconfigure or reformat the data on the Restaurant cards, as they contain a lot of info, including collapsing space when the Edit and Delete buttons are not present. The forms and modals need better formatting and I’d like to add a Delete modal. The formatting on the Restaurant detail page could use upgrading visually as well as noting when and who made reviews. Also, when no review have been conducted yet, it should note this.
