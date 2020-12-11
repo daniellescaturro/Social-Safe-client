@@ -34,6 +34,7 @@ Additionally, you can see the Review button on the bottom right side of the Rest
 <p align=“center”>
 	<img src=“https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_top.png">
 </p>
+
 <p align=“center”>
   	<img src="https://github.com/daniellescaturro/socialsafe-client/blob/main/SocialSafe_showpage_botton.png">
 </p>														 
