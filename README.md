@@ -41,7 +41,7 @@ Additionally, you can see the Review button on the bottom right side of the Rest
  * Additionally, on the homepage users can conduct a live search of the Yelp API using location parameters. Records that are interacted with by clicking either the “favorite” or “review” buttons will be added to the database. Duplicates will not be entered into the database.  
 
 ## Technical Specifications
-This app was created using Flask/Python, React, Semantic UI React and CSS. It is deployed on Heroku and requires no installation. 
+This app was created using Flask/Python, React, SQL, Semantic UI React and CSS. It is deployed on Heroku and requires no installation. 
 
 ## Forthcoming Features
  * In a future version of the application I plan to expand the search functionality beyond location parameter to include items such as cuisine, venue type, etc. And it needs improved functionality for adding restaurants from search than refreshing the screen.  The dropdown either needs to be removed or the results should be made clickable. 
